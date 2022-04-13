@@ -10,7 +10,7 @@ class BladeJsResourceService extends JsResourceService
     public function create(array $request): void
     {
         $request = (new BladeJsRequestService)->handle($request);
-        ray($request);
+
         $this->createFile($request);
     }
 }
