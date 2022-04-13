@@ -1,0 +1,29 @@
+{
+  "name": "bakgul/laravel-resource-creator",
+  "description": "Create Laravel resources easily.",
+  "authors": [
+    {
+      "name": "Bulent Akgul",
+      "email": "bulent.akgul@me.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "bakgul/kernel": "@dev",
+    "bakgul/command-evaluator": "@dev",
+    "bakgul/file-content": "@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Bakgul\\ResourceCreator\\": "src/",
+      "Bakgul\\ResourceCreator\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Bakgul\\ResourceCreator\\ResourceCreatorServiceProvider"
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@extends("{{ package }}:{{ extend_page }}")
+
+@section("page-section")
+
+<div class="{{ name_kebab }}"></div>
+
+@endsection

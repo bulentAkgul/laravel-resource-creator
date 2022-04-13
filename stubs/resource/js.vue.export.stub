@@ -1,0 +1,6 @@
+/** IMPORTS */
+{{ imports }}
+/** EXPORT */
+export default () => {
+  return {{ brackets }}
+}

@@ -1,0 +1,8 @@
+/** IMPORTS */
+import { defineStore } from 'pinia'
+/** STORE */
+export const use{{ name_pascal }}Store = defineStore("{{ id }}", {
+  state: () => ({}),
+  getters: {},
+  actions: {}
+});

@@ -1,0 +1,10 @@
+@extends("{{ package }}:page")
+
+@section("page-content")
+
+<div class="{{ name_kebab }}"></div>
+
+@yield("page-section")
+
+@endsection
+

@@ -1,0 +1,12 @@
+/** IMPORTS */
+{{ imports }}
+/** ROUTES */
+export default () => {
+  return {
+    path: "{{ path }}",
+    name: "{{ name }}",
+    component: {{ name_pascal }},
+    props: true,
+    children: [],
+  }
+}

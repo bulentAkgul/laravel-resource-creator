@@ -1,0 +1,23 @@
+export const {{ name_pascal }}States = () => {
+  return {
+    //
+  }
+}
+
+export const {{ name_pascal }}Actions = () => {
+  return {
+    //
+  }
+}
+
+export const {{ name_pascal }}Mutations = () => {
+  return {
+    //
+  }
+}
+
+export const {{ name_pascal }}Getters = () => {
+  return {
+    //
+  }
+}

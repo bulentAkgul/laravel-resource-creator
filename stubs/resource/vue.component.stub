@@ -1,0 +1,18 @@
+<template></template>
+
+<script{{ setup }}{{ lang }}>
+
+{{{{export default {
+  name: "{{ name_pascal }}",
+  props: {},
+  emits: [],
+  data() {
+    return {};
+  },
+  computed: {},
+  watch: {},
+  created() {},
+  mounted() {},
+  methods: {},
+};}}}}
+</script>

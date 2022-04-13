@@ -1,0 +1,20 @@
+<template>{{ view }}</template>
+
+<script{{ setup }}{{ lang }}>
+{{ imports }}
+{{{{export default {
+  name: "{{ name_pascal }}",
+  components: {},
+  mixins: [],
+  props: {},
+  emits: [],
+  data() {
+    return {};
+  },
+  computed: {{{ computeds }}},
+  watch: {},
+  created() {},
+  mounted() {},
+  methods: {{{ methods }}},
+};}}}}
+</script>
