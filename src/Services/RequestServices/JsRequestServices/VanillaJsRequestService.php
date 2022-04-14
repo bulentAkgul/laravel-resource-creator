@@ -2,11 +2,10 @@
 
 namespace Bakgul\ResourceCreator\Services\RequestServices\JsRequestServices;
 
-use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Tasks\ConvertCase;
 use Bakgul\ResourceCreator\Services\RequestServices\JsRequestService;
 
-class BladeJsRequestService extends JsRequestService
+class VanillaJsRequestService extends JsRequestService
 {
     public function handle(array $request): array
     {

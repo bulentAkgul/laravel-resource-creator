@@ -23,11 +23,19 @@ class JsResourceService extends ResourceService
         foreach ([$attr['app_type'], Arry::get($attr, 'framework')] as $type) {
             if (!$type) continue;
             
-            $class = "{$base}\\" . ucfirst($type) . $tail;
+            $class = "{$base}\\{$this->setType($type)}{$tail}";
 
             if (class_exists("\\{$class}")) return new $class;
         }
 
         return null;
+    }
+
+    protected function setType(string $type)
+    {
+        return ucfirst(match($type) {
+            'blade' => 'vanilla',
+            default => $type
+        });
     }
 }
