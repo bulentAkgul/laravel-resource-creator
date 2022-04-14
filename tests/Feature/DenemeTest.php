@@ -14,7 +14,7 @@ class DenemeTest extends TestCase
     {
         $this->testPackage = (new SetupTest)();
 
-        $this->artisan('create:resource button view:module testing');
+        $this->artisan('create:resource posts view:page testing web');
 
         $this->assertTrue(true);
     }
@@ -24,7 +24,7 @@ class DenemeTest extends TestCase
     {
         $this->testPackage = (new SetupTest)([false, true]);
 
-        $this->artisan('create:resource button view:component web -c');
+        $this->artisan('create:resource posts view:page web');
 
         $this->assertTrue(true);
     }
@@ -34,7 +34,7 @@ class DenemeTest extends TestCase
     {
         $this->testPackage = (new SetupTest)([true, false]);
 
-        $this->artisan('create:resource posts:all view:page admin');
+        $this->artisan('create:resource posts view:page admin');
 
         $this->assertTrue(true);
     }
