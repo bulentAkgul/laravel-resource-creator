@@ -28,7 +28,7 @@ class RegistrationService extends ResourceCreator
     {
         $this->getTargetFileContent();
 
-        if ($this->isNotRegisterable()) return;
+        if ($this->isNotRegisterable(Arry::get($lineSpecs, 'isEmpty'))) return;
 
         if ($only != 'block') $this->insertCodeLines($this->setLineSpecs($lineSpecs));
 
@@ -42,9 +42,9 @@ class RegistrationService extends ResourceCreator
         $this->fileContent = Content::read($this->request['attr']['target_file'], purify: false);
     }
 
-    protected function isNotRegisterable()
+    protected function isNotRegisterable(?bool $isEmpty)
     {
-        return $this->isContentNotReady()
+        return $this->isContentNotReady($isEmpty)
             || Arry::contains($this->request['map']['imports'], $this->fileContent);
     }
 
@@ -54,7 +54,8 @@ class RegistrationService extends ResourceCreator
             'isStrict' => false,
             'part' => '',
             'repeat' => 0,
-            'isSortable' => true
+            'isSortable' => true,
+            'isEmpty' => false
         ], $specs);
     }
 
@@ -68,9 +69,10 @@ class RegistrationService extends ResourceCreator
         ], $specs);
     }
 
-    protected function isContentNotReady()
+    protected function isContentNotReady(?bool $isEmpty)
     {
-        return $this->request['attr']['type'] != 'css' && !isset($this->fileContent) || empty($this->fileContent);
+        return !$isEmpty && empty($this->fileContent);
+        // return $this->request['attr']['type'] != 'css' && !isset($this->fileContent) || empty($this->fileContent);
     }
 
     protected function insertCodeLines(array $specs): void
