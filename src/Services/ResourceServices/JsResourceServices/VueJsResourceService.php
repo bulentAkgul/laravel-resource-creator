@@ -2,7 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices;
 
-use Bakgul\Kernel\Helpers\Requirement;
+use Bakgul\Kernel\Helpers\Prevented;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices\VueRoutePageRegistrationService;
 use Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices\VueRouteSectionRegistrationService;
@@ -36,13 +36,13 @@ class VueJsResourceService extends JsResourceService
 
     private function isNotStorable($attr)
     {
-        return !Requirement::store($attr['pipeline']['type'])
+        return Prevented::store($attr['pipeline']['type'])
             || in_array($attr['variation'], Settings::resourceOptions('levels.low'));
     }
 
     private function isNotRoutable($attr)
     {
-        return !Requirement::route($attr['router'])
+        return Prevented::route($attr['router'])
             || !in_array($attr['variation'], Settings::resourceOptions('levels.high'));
     }
 
