@@ -24,7 +24,7 @@ class DenemeTest extends TestCase
     {
         $this->testPackage = (new SetupTest)([false, true]);
 
-        $this->artisan('create:resource posts:index view:page admin');
+        $this->artisan('create:resource button view:component web -c');
 
         $this->assertTrue(true);
     }
