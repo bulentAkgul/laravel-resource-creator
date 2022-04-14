@@ -81,9 +81,7 @@ class RequestService extends ResourceCreator
 
     private function setPrefix(array $attr): ?string
     {
-        return Settings::resourceOptions('use_prefix')
-            ? Settings::get("prefixes.{$attr['variation']}")
-            : '';
+        return Settings::resourceOptions('use_prefix') ? Settings::prefixes($attr['variation']) : '';
     }
 
     protected static function setFolder(array $attr): string

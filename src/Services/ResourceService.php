@@ -50,7 +50,7 @@ class ResourceService extends ResourceCreator
     protected function callClass(array $request, string $class): bool
     {
         if (!class_exists($class)) return false;
-
+        
         (new $class)->create($request);
 
         return true;
