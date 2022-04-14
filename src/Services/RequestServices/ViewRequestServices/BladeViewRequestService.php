@@ -3,6 +3,7 @@
 namespace Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices;
 
 use Bakgul\Kernel\Helpers\Settings;
+use Bakgul\Kernel\Helpers\Text;
 use Bakgul\Kernel\Tasks\ConvertCase;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestService;
 
@@ -35,7 +36,8 @@ class BladeViewRequestService extends ViewRequestService
         return array_merge($request['map'], [
             'name_kebab' => ConvertCase::kebab($request['map']['name']),
             'extend' => '',
-            'extend_page' => $this->setExtendPage($request['attr'])
+            'extend_page' => $this->setExtendPage($request['attr']),
+            'package' => Text::prepend($request['map']['package'] ?: '', ':')
         ]);
     }
 

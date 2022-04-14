@@ -1,4 +1,4 @@
-@extends("{{ package }}:{{ extend_page }}")
+@extends("{{ package }}{{ extend_page }}")
 
 @section("page-section")
 

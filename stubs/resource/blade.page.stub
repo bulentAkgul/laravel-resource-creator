@@ -1,4 +1,4 @@
-@extends("{{ package }}:page")
+@extends("{{ package }}page")
 
 @section("page-content")
 
