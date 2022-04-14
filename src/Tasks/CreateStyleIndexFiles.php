@@ -20,7 +20,7 @@ class CreateStyleIndexFiles
         $file = Text::getTail($request['attr']['target_file']);
 
         [$path, $folders] = self::serialize($request);
-        ray([$path, $folders]);
+
         foreach ($folders as $i => $folder) {
             $path .= "/{$folder}";
 
