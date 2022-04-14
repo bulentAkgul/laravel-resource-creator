@@ -98,7 +98,7 @@ return [
     ],
     'pinia' => [
         'framework' => 'vue',
-        'extention' => 'ts',
+        'extension' => 'js',
         'name_schema' => 'use{{ name_pascal }}Store'
     ],
     'inertia' => [
