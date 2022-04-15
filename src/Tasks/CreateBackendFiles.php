@@ -42,7 +42,9 @@ class CreateBackendFiles
 
     private static function hasNoClassPair(array $request): bool
     {
-        return !$request['class'] && self::getType($request) != 'blade';
+        return self::getType($request) != 'blade' || (
+            !$request['class'] && $request['extra'] != 'livewire'
+        );
     }
 
     private static function getType($request)
@@ -87,8 +89,11 @@ class CreateBackendFiles
 
     private static function setType(array $request)
     {
-        return (Isolation::variation($request['type']) == 'page' ? 'controller' : 'component')
-            . self::appendVariation($request);
+        return (match (true) {
+            $request['extra'] == 'livewire' => 'livewire',
+            $request['type'] == 'page' => 'controller',
+            default => 'component',
+        }) . self::appendVariation($request);
     }
 
     private static function appendVariation($request)

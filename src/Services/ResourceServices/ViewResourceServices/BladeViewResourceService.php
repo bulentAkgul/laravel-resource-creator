@@ -11,6 +11,6 @@ class BladeViewResourceService extends ViewResourceService
     {
         $request = (new BladeViewRequestService)->handle($request);
 
-        $this->callClass($request, $this->class($request['attr'], __NAMESPACE__)) ?: $this->createFile($request);
+        $this->callClass($request, $this->class($request['attr'], __NAMESPACE__, $request['attr']['extra'])) ?: $this->createFile($request);
     }
 }

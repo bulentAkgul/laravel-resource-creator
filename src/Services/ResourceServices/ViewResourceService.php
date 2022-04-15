@@ -24,13 +24,13 @@ class ViewResourceService extends ResourceService
         ]));
     }
 
-    protected function class(array $attr, string $namespace): string
+    protected function class(array $attr, string $namespace, ?string $variation = null): string
     {
         return Path::glue([
             '',
             $namespace,
             'ViewResourceSubServices',
-            ucfirst($attr['variation']) . ucfirst($attr['type']) . 'ViewResourceService'
+            ucfirst($variation ?: $attr['variation']) . ucfirst($attr['type']) . 'ViewResourceService'
         ], '\\');
     }
 }

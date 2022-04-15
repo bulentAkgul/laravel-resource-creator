@@ -6,7 +6,7 @@ return [
         'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ folder }}{{ subs }}',
         'tasks' => ['', 'index', 'store', 'update', 'destroy'],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
-        'roles' => [''],
+        'roles' => ['', 'livewire'],
         'name_count' => 'X',
         'pairs' => ['css', 'js'],
     ],

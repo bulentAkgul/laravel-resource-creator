@@ -27,7 +27,7 @@ class CreateResourceCommand extends Command
         {--f|force}
     ';
 
-    protected $description = 'extra is (type == "view" && app == null ? file type : js role), class is wheter blade component has related class';
+    protected $description = 'extra is (type == "view" && app == null ? file type or role (if livewire) : js role), class is wheter blade component has related class';
     private $service;
 
     public function __construct()

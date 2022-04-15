@@ -37,7 +37,9 @@ class BladeViewRequestService extends ViewRequestService
             'name_kebab' => ConvertCase::kebab($request['map']['name']),
             'extend' => '',
             'extend_page' => $this->setExtendPage($request['attr']),
-            'package' => Text::prepend($request['map']['package'] ?: '', ':')
+            'package' => Text::prepend($request['map']['package'] ?: '', ':'),
+            'lw_styles' => $this->setLivewire('Styles'),
+            'lw_scripts' => $this->setLivewire('Scripts'),
         ]);
     }
 
@@ -58,5 +60,12 @@ class BladeViewRequestService extends ViewRequestService
             Settings::folders('view') . DIRECTORY_SEPARATOR,
             $path
         )[1]);
+    }
+
+    private function setLivewire($suffix)
+    {
+        return in_array('livewire', Settings::dependencies('blade.npm'))
+            ? "@liverwire{$suffix}"
+            : '';
     }
 }
