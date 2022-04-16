@@ -9,9 +9,16 @@ class VueViewPageRegistrationService extends RegistrationService
 {
     public function handle(array $request): void
     {
+        if ($this->isNotRegistrable($request['attr'])) return;
+
         $this->request = (new VueViewPageRegistrationRequestService)->handle($request);
 
         $this->register($this->lineSpecs(), [], '', 'line');
+    }
+
+    private function isNotRegistrable(array $attr)
+    {
+        return false;
     }
 
     private function lineSpecs()
