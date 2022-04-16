@@ -11,4 +11,5 @@ return [
     'use_prefix' => true,
     'section_parents' => ['page', 'class', 'store'],
     'css' => 'sass',
+    'tasks_as_sections' => false,
 ];

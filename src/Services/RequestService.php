@@ -23,17 +23,34 @@ class RequestService extends ResourceCreator
 
     private function generateAttr(array $request)
     {
-        return [
-            ...SetRequestAttr::_($request),
+        return array_merge($a = SetRequestAttr::_($request), [
             'sharing' => $this->isSharable($request['variation']),
-            'job' => 'resource'
-        ];
+            'job' => 'resource',
+            'parent' => $this->updateParent($a),
+            'path' => $this->updatePath($a, 'path'),
+            'path_schema' => $this->updatePath($a, 'path_schema'),
+            'prefix' => $this->setPrefix($request['variation'])
+        ]);
     }
     
     public function isSharable($variation): bool
     {
         return in_array($variation, Settings::resourceOptions('levels.low'))
             && Settings::resourceOptions('share_low_levels_betwen_apps');
+    }
+
+    private function updateParent(array $attr): array
+    {
+        return Arry::has('wrapper', $attr)
+            ? [...$attr['parent'], 'name' => $attr['wrapper']]
+            : $attr['parent'];
+    }
+
+    private function updatePath($attr, $key)
+    {
+        return Arry::has('wrapper', $attr)
+            ? str_replace('{{ folder }}', '{{ wrapper }}', $attr[$key])
+            : $attr[$key];
     }
 
     private function generateMap(array $attr): array
@@ -63,15 +80,16 @@ class RequestService extends ResourceCreator
             'name_pascal' => ConvertCase::pascal($n),
             'container' => ConvertCase::kebab($map['container']),
             'folder' => $this->setFolder($request['attr']),
+            'wrapper' => $this->setWrapper($request['attr']),
             'role' => '',
         ];
     }
 
     protected function setName(array $attr, array $map): string
     {
-        return ConvertCase::{$attr['convention']}(implode('-', array_filter([
-            $this->setPrefix($attr), $map['name'], $attr['task']
-        ])));
+        return ConvertCase::{$attr['convention']}(
+            $this->replace($map, $attr['name_schema'], true, '-')
+        );
     }
 
     public function setParent(array $attr): string
@@ -79,9 +97,9 @@ class RequestService extends ResourceCreator
         return ConvertCase::{$attr['convention']}($attr['parent']['name']);
     }
 
-    private function setPrefix(array $attr): ?string
+    private function setPrefix(string $variation): string
     {
-        return Settings::resourceOptions('use_prefix') ? Settings::prefixes($attr['variation']) : '';
+        return Settings::resourceOptions('use_prefix') ? Settings::prefixes($variation) : '';
     }
 
     protected static function setFolder(array $attr): string
@@ -91,6 +109,11 @@ class RequestService extends ResourceCreator
         return in_array($attr['variation'], Settings::resourceOptions('section_parents'))
             ? $attr['name']
             : ($attr['variation'] == 'section' ? ($attr['parent']['name'] ?: $attr['name']) : '');
+    }
+
+    private function setWrapper(array $attr): string
+    {
+        return ConvertCase::_(Arry::get($attr, 'wrapper') ?? '', $attr['convention']);
     }
 
     protected function setFile(array $request): string
@@ -113,8 +136,8 @@ class RequestService extends ResourceCreator
         return $this->replace($request['map'], $request['attr'][$key], str_contains($key, 'path'));
     }
 
-    protected function replace(array $map, string $value, bool $append = false)
+    protected function replace(array $map, string $value, bool $append = false, ?string $glue = null)
     {
-        return Text::replaceByMap($map, $value, $append);
+        return Text::replaceByMap($map, $value, $append, $glue);
     }
 }

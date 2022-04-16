@@ -9,6 +9,7 @@ use Bakgul\Evaluator\Concerns\ShouldBeEvaluated;
 use Bakgul\Kernel\Tasks\MakeFileList;
 use Bakgul\ResourceCreator\Services\ResourceService;
 use Bakgul\ResourceCreator\Tasks\CreateBackendFiles;
+use Bakgul\ResourceCreator\Tasks\ModifyFileList;
 use Illuminate\Console\Command;
 
 class CreateResourceCommand extends Command
@@ -46,11 +47,11 @@ class CreateResourceCommand extends Command
 
         // if ($this->stop()) return $this->terminate();
 
-        $queue = MakeFileList::_($this->request);
+        $queue = ModifyFileList::_(MakeFileList::_($this->request));
 
         $this->createFiles($queue);
 
-        CreateBackendFiles::_($this->request, $queue);
+        // CreateBackendFiles::_($this->request, $queue);
     }
 
     private function createFiles(array $queue)
