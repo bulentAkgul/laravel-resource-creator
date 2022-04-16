@@ -3,6 +3,7 @@
 return [
     'view' => [
         'family' => 'resources',
+        'name_schema' => '{{ prefix }}{{ name }}{{ task }}',
         'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ folder }}{{ subs }}',
         'tasks' => ['', 'index', 'store', 'update', 'destroy'],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
@@ -12,6 +13,7 @@ return [
     ],
     'js' => [
         'family' => 'resources',
+        'name_schema' => '{{ prefix }}{{ name }}{{ task }}{{ wrapper }}',
         'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ role }}{{ variation }}{{ folder }}{{ subs }}',
         'tasks' => ['', 'index', 'store', 'update', 'destroy'],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
@@ -21,6 +23,7 @@ return [
     ],
     'css' => [
         'family' => 'resources',
+        'name_schema' => '{{ prefix }}{{ name }}{{ task }}{{ wrapper }}',
         'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ folder }}{{ subs }}',
         'tasks' => ['', 'index', 'store', 'update', 'destroy'],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
