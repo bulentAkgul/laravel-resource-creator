@@ -2,7 +2,6 @@
 
 namespace Bakgul\ResourceCreator\Tests\Feature;
 
-use Bakgul\Kernel\Tests\Concerns\HasTestMethods;
 use Bakgul\Kernel\Tests\Tasks\SetupTest;
 use Bakgul\Kernel\Tests\TestCase;
 
@@ -14,7 +13,7 @@ class DenemeTest extends TestCase
     {
         $this->testPackage = (new SetupTest)();
 
-        $this->artisan('create:resource sub1/sub2/posts view:page testing admin');
+        $this->artisan('create:resource posts view:page testing admin');
 
         $this->assertTrue(true);
     }
