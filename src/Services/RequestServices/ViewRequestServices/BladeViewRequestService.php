@@ -2,15 +2,20 @@
 
 namespace Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices;
 
-use Bakgul\Kernel\Helpers\Settings;
-use Bakgul\Kernel\Helpers\Text;
 use Bakgul\Kernel\Tasks\ConvertCase;
+use Bakgul\ResourceCreator\Functions\RequestFunctions\ConstructPath;
+use Bakgul\ResourceCreator\Functions\RequestFunctions\SetFileName;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestService;
+use Bakgul\ResourceCreator\Vendors\Blade;
 
 class BladeViewRequestService extends ViewRequestService
 {
+    private $blade;
+
     public function handle(array $request): array
     {
+        $this->blade = new Blade;
+
         $request['attr'] = $this->extendAttr($request);
         $request['map'] = $this->extendMap($request);
 
@@ -20,52 +25,19 @@ class BladeViewRequestService extends ViewRequestService
     private function extendAttr(array $request): array
     {
         return array_merge($request['attr'], [
-            'file' => $this->setFile($request),
-            'stub' => $this->setStub($request),
-            'path' => $this->setPath($request),
+            'file' => SetFileName::_($request),
+            'stub' => $this->blade->stub($request),
+            'path' => ConstructPath::_($request),
         ]);
-    }
-
-    private function setStub(array $request): string
-    {
-        return "blade.{$request['attr']['variation']}.stub";
     }
 
     protected function extendMap(array $request): array
     {
         return array_merge($request['map'], [
-            'name_kebab' => ConvertCase::kebab($request['map']['name']),
             'extend' => '',
-            'extend_page' => $this->setExtendPage($request['attr']),
-            'package' => Text::prepend($request['map']['package'] ?: '', ':'),
-            'lw_styles' => $this->setLivewire('Styles'),
-            'lw_scripts' => $this->setLivewire('Scripts'),
+            'name_kebab' => ConvertCase::kebab($request['map']['name']),
+            'extend_page' => $this->blade->extend($request['attr']),
+            'package' => $this->blade->package($request['map']['package']),
         ]);
-    }
-
-    private function setExtendPage(array $attr): string
-    {
-        if ($attr['variation'] != 'section') return '';
-
-        return $attr['variation'] == 'section'
-            ? $this->bladePath($attr['path']) . '.' . ConvertCase::_(
-                $attr['parent']['name'],
-                $attr['convention']
-            ) : '';
-    }
-
-    private function bladePath($path)
-    {
-        return str_replace(DIRECTORY_SEPARATOR, '.', explode(
-            Settings::folders('view') . DIRECTORY_SEPARATOR,
-            $path
-        )[1]);
-    }
-
-    private function setLivewire($suffix)
-    {
-        return in_array('livewire', Settings::dependencies('blade.npm'))
-            ? "@liverwire{$suffix}"
-            : '';
     }
 }

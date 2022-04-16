@@ -2,6 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices;
 
+use Bakgul\Kernel\Functions\CreateFile;
 use Bakgul\Kernel\Helpers\Prevented;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices\VueRoutePageRegistrationService;
@@ -20,7 +21,7 @@ class VueJsResourceService extends JsResourceService
 
             $request = (new VueJsRequestService($role))->handle($request);
 
-            $this->createFile($request);
+            CreateFile::_($request);
 
             $this->registrationService($request['attr'], $role)?->handle($request);
         }

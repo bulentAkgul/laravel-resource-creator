@@ -2,99 +2,60 @@
 
 namespace Bakgul\ResourceCreator\Services\RequestServices\JsRequestServices;
 
-use Bakgul\Kernel\Tasks\ConvertCase;
-use Bakgul\ResourceCreator\Helpers\Pinia;
+use Bakgul\ResourceCreator\Domains\VueComposable;
+use Bakgul\ResourceCreator\Domains\VueRoute;
+use Bakgul\ResourceCreator\Domains\VueStore;
+use Bakgul\ResourceCreator\Functions\RequestFunctions\ConvertValue;
 use Bakgul\ResourceCreator\Services\RequestServices\JsRequestService;
-use Illuminate\Support\Str;
 
 class VueJsRequestService extends JsRequestService
 {
-    private $store;
-
-    public function __construct(private string $role) {}
+    public function __construct(private string $role)
+    {
+        $this->service = match ($role) {
+            'route' => new VueRoute,
+            'store' => new VueStore,
+            'mixin' => new VueComposable,
+            default => null
+        };
+    }
 
     public function handle(array $request): array
     {
-        $this->store = $request['attr']['pipeline']['options']['store'];
+        $request['attr'] = $this->extendAttr($request);
+        $request['map'] = $this->extendMap($request);
 
-        return $this->extend([
-            'attr' => $this->extendAttr($request),
-            'map' => $this->extendMap($request),
-        ]);
+        return $this->modify($request);
     }
 
     public function extendAttr(array $request): array
     {
         return array_merge($request['attr'], [
             'role' => $this->role,
-            'stub' => $this->setStub($request),
-            'file' => $this->setFile($request)
+            'stub' => $this->service->stub($request),
+            'file' => $this->service->file($request)
         ]);
-    }
-
-    private function setStub(array $request)
-    {
-        return 'js.vue.'. match(true) {
-            $this->role == 'route' => 'route',
-            $this->store == 'pinia' => 'pinia',
-            $request['attr']['variation'] == 'section' => 'section',
-            default => 'vuex',
-        } .'.stub';
-    }
-
-    protected function setFile(array $request): string
-    {
-        return $this->role == 'store' && $this->store == 'pinia'
-            ? Pinia::file($request['map']) . ".js"
-            : "{$request['map']['name']}.js";
     }
 
     public function extendMap(array $request): array
     {
         return array_merge($request['map'], [
-            'id' => ConvertCase::camel($request['map']['name']),
-            'role' => ConvertCase::_($this->role, $request['attr']['convention'], false),
-            'path' => $this->setPath($request),
+            'id' => ConvertValue::_($request['map']['name'], 'camel'),
+            'role' => ConvertValue::_($request['attr'], 'role', false),
+            'route' => $this->setRoute($request),
             'imports' => '',
         ]);
     }
 
-    protected function setPath(array $request): string
+    private function setRoute(array $request)
     {
-        return str_contains(strtolower($request['map']['name']), 'index') ? '' : $this->slug($request);
+        return $this->role == 'route' ? $this->service->route($request) : '';
     }
 
-    private function slug(array $request): string
+    public function modify(array $request): array
     {
-        if ($request['attr']['task'] == 'index') return '';
-
-        return Str::slug($request['attr']['variation'] == 'page'
-            ? ConvertCase::kebab($request['map']['name'])
-            : $this->getSlug($request)
-        );
-    }
-
-    private function getSlug(array $request): string
-    {
-        $parts = ConvertCase::kebab($request['map']['name'], returnArray: true);
-        $first = array_shift($parts);
-
-        return implode('-', array_filter([
-            ...$parts, $first == $request['attr']['parent']['name'] ? '' : $first
-        ]));
-    }
-
-    public function extend(array $request): array
-    {
-        $request['attr']['path'] = $this->updatePath($request, $this->setSchema($request));
+        $request['attr']['path'] = $this->updatePath($request, $this->service->schema($request['attr']));
 
         return $request;
-    }
-
-    private function setSchema(array $request)
-    {
-        return $this->role == 'route'
-            ? str_replace('{{ variation }}', '', $request['attr']['path_schema'])
-            : $request['attr']['path_schema'];
     }
 }

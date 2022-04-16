@@ -4,6 +4,7 @@ namespace Bakgul\ResourceCreator\Services\RequestServices\RegistrationRequestSer
 
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
+use Bakgul\Kernel\Tasks\ConvertCase;
 use Bakgul\ResourceCreator\Services\RequestService;
 
 class VueStorePageRegistrationRequestService extends RequestService
@@ -42,5 +43,10 @@ class VueStorePageRegistrationRequestService extends RequestService
             $request['map']['name'],
             $request['map']['name']
         ]);
+    }
+
+    private function getFolder($key, $convention): string
+    {
+        return ConvertCase::_(Settings::folders($key), $convention);
     }
 }

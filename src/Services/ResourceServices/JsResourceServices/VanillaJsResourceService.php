@@ -2,6 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices;
 
+use Bakgul\Kernel\Functions\CreateFile;
 use Bakgul\ResourceCreator\Services\RequestServices\JsRequestServices\VanillaJsRequestService;
 use Bakgul\ResourceCreator\Services\ResourceServices\JsResourceService;
 
@@ -9,8 +10,6 @@ class VanillaJsResourceService extends JsResourceService
 {
     public function create(array $request): void
     {
-        $request = (new VanillaJsRequestService)->handle($request);
-
-        $this->createFile($request);
+        CreateFile::_((new VanillaJsRequestService)->handle($request));
     }
 }

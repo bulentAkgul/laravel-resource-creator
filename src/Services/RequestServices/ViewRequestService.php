@@ -3,26 +3,33 @@
 namespace Bakgul\ResourceCreator\Services\RequestServices;
 
 use Bakgul\Kernel\Helpers\Settings;
+use Bakgul\ResourceCreator\Functions\RequestFunctions\SetFolder;
 use Bakgul\ResourceCreator\Services\RequestService;
+use Bakgul\ResourceCreator\Tasks\RequestTasks\ExtendMap;
 
 class ViewRequestService extends RequestService
 {
     public function handle(array $request): array
     {
-        $request['attr'] = $this->modifyAttr($request['attr']);
-        $request['map'] = $this->extendMap($request);
+        $request['attr'] = $this->extendAttr($request['attr']);
+        $request['map'] = ExtendMap::_($request);
 
         return $request;
     }
 
-    public function modifyAttr(array $attr): array
+    private function extendAttr(array $attr): array
     {
         return array_merge($attr, [
             'category' => $attr['type'],
-            'type' => $t = $attr['extra'] ?: $attr['app_type'],
+            'type' => $t = $this->setType($attr),
             'convention' => Settings::resources("{$t}.convention") ?? 'pascal',
             'extension' => Settings::resources("{$t}.extension"),
-            'folder' => $this->setFolder($attr),
+            'folder' => SetFolder::_($attr),
         ]);
+    }
+
+    private function setType(array $attr): string
+    {
+        return $attr['extra'] ?: $attr['app_type'];
     }
 }

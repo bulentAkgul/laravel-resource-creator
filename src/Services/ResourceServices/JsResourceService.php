@@ -2,6 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Services\ResourceServices;
 
+use Bakgul\Kernel\Functions\CallClass;
 use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\ResourceCreator\Services\RequestServices\JsRequestService;
 use Bakgul\ResourceCreator\Services\ResourceService;
@@ -10,9 +11,7 @@ class JsResourceService extends ResourceService
 {
     public function create(array $request): void
     {
-        $request = (new JsRequestService)->handle($request);
-
-        $this->service($request['attr'])?->create($request);
+        CallClass::_((new JsRequestService)->handle($request), 'resource', __NAMESPACE__);
     }
 
     private function service(array $attr)

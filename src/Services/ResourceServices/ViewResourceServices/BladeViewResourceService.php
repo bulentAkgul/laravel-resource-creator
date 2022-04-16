@@ -2,6 +2,8 @@
 
 namespace Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceServices;
 
+use Bakgul\Kernel\Functions\CallClass;
+use Bakgul\Kernel\Functions\CreateFile;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices\BladeViewRequestService;
 use Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceService;
 
@@ -11,6 +13,6 @@ class BladeViewResourceService extends ViewResourceService
     {
         $request = (new BladeViewRequestService)->handle($request);
 
-        $this->callClass($request, $this->class($request['attr'], __NAMESPACE__, $request['attr']['extra'])) ?: $this->createFile($request);
+        CallClass::_($request, 'view', __NAMESPACE__, $request['attr']['extra']) ?: CreateFile::_($request);
     }
 }

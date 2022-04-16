@@ -33,15 +33,6 @@ class ResourceService extends ResourceCreator
         };
     }
 
-    public function createFile($request)
-    {
-        if ($this->isFileNotCreatable($request['attr'])) return;
-
-        CompleteFolders::_($request['attr']['path']);
-
-        MakeFile::_($request);
-    }
-
     protected function isFileNotCreatable(array $attr): bool
     {
         return !$attr['force'] && file_exists(Path::glue([$attr['path'], $attr['file']]));
