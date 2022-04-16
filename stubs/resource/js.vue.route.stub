@@ -3,7 +3,7 @@
 /** ROUTES */
 export default () => {
   return {
-    path: "{{ path }}",
+    path: "{{ route }}",
     name: "{{ name }}",
     component: {{ name_pascal }},
     props: true,
