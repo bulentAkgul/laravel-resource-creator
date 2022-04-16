@@ -14,7 +14,7 @@ class DenemeTest extends TestCase
     {
         $this->testPackage = (new SetupTest)();
 
-        $this->artisan('create:resource posts view:page testing web');
+        $this->artisan('create:resource sub1/sub2/posts view:page testing admin');
 
         $this->assertTrue(true);
     }
