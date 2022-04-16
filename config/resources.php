@@ -91,7 +91,7 @@ return [
         'convention' => 'pascal',
         'extension' => 'vue',
         'options' => [
-            'store' => 'vuex',
+            'store' => 'pinia',
             'compositionAPI' => false,
             'ts' => false,
         ],
@@ -99,7 +99,7 @@ return [
     'pinia' => [
         'framework' => 'vue',
         'extension' => 'js',
-        'name_schema' => 'use{{ name_pascal }}Store'
+        'name_schema' => 'use{{ schema }}Store'
     ],
     'inertia' => [
         'renderables' => ['index', 'show', 'edit']
