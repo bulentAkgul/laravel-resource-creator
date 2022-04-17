@@ -4,10 +4,10 @@ namespace Bakgul\ResourceCreator\Tests\Feature;
 
 use Bakgul\Kernel\Tests\Tasks\SetupTest;
 use Bakgul\Kernel\Tests\TestCase;
+use Bakgul\ResourceCreator\Vendors\Pinia;
 
 class DenemeTest extends TestCase
 {
-
     /** @test */
     public function packagified_laravel_resource()
     {
