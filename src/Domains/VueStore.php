@@ -25,9 +25,9 @@ class VueStore
         return $this->store->stub($request['attr']['variation']);
     }
 
-    protected function file(array $request): string
+    public function file(array $request): string
     {
-        return $this->store->file($request['map']);
+        return "{$this->store->file($request['map'])}.js";
     }
 
     public function code(array $request): array
