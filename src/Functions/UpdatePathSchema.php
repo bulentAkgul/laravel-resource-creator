@@ -1,7 +1,8 @@
 <?php
 
-namespace Bakgul\ResourceCreator\Functions\RequestFunctions;
+namespace Bakgul\ResourceCreator\Functions;
 
+use Bakgul\Kernel\Functions\UpdateSchema;
 use Bakgul\Kernel\Helpers\Arry;
 
 class UpdatePathSchema

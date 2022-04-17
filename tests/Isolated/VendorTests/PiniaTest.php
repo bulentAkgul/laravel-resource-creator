@@ -1,6 +1,6 @@
 <?php
 
-namespace Bakgul\ResourceCreator\Tests\Feature\IsolationTest\VendorTests;
+namespace Bakgul\ResourceCreator\Tests\Isolated\VendorTests;
 
 use Bakgul\FileContent\Tasks\CompleteFolders;
 use Bakgul\Kernel\Tests\Tasks\SetupTest;
@@ -9,7 +9,7 @@ use Bakgul\ResourceCreator\Vendors\Pinia;
 
 class PiniaTest extends TestCase
 {
-    private $p;
+    private $c;
     private $map1 = [
         'label' => 'Index',
         'prefix' => '',
@@ -25,7 +25,7 @@ class PiniaTest extends TestCase
 
     public function __construct()
     {
-        $this->p = new Pinia;
+        $this->c = new Pinia;
 
         parent::__construct();
     }
@@ -33,49 +33,51 @@ class PiniaTest extends TestCase
     /** @test */
     public function pinia_vendor()
     {
-        $this->assertEquals('pinia', $this->p->vendor());
+        $this->assertEquals('pinia', $this->c->vendor());
     }
 
     /** @test */
     public function pinia_stub()
     {
-        $this->assertEquals('js.vue.pinia.stub', $this->p->stub());
+        $this->assertEquals('js.vue.pinia.stub', $this->c->stub());
     }
 
     /** @test */
     public function pinia_schema()
     {
-        $this->assertEquals('use{{ prefix }}{{ label }}{{ task }}{{ wrapper }}', $this->p->schema(false));
-        $this->assertEquals('use{{ prefix }}{{ label }}{{ task }}{{ wrapper }}Store', $this->p->schema(true));
+        $this->assertEquals('use{{ prefix }}{{ label }}{{ task }}{{ wrapper }}', $this->c->schema(false));
+        $this->assertEquals('use{{ prefix }}{{ label }}{{ task }}{{ wrapper }}Store', $this->c->schema(true));
     }
 
     /** @test */
     public function pinia_file()
     {
-        $this->assertEquals('useIndexPosts', $this->p->file($this->map1));
+        $this->assertEquals('useIndexPosts', $this->c->file($this->map1));
 
-        $this->assertEquals('useCustomBuyAllStuff', $this->p->file($this->map2));
+        $this->assertEquals('useCustomBuyAllStuff', $this->c->file($this->map2));
     }
 
     /** @test */
     public function pinia_name()
     {
-        $this->assertEquals('useIndexPostsStore', $this->p->name($this->map1));
+        $this->assertEquals('useIndexPostsStore', $this->c->name($this->map1));
 
-        $this->assertEquals('useCustomBuyAllStuffStore', $this->p->name($this->map2));
+        $this->assertEquals('useCustomBuyAllStuffStore', $this->c->name($this->map2));
     }
 
     /** @test */
-    public function pinia_mapFunctions()
+    public function pinia_map_functions()
     {
-        $this->assertEquals(['computeds' => ['State'], 'methods' => ['Actions']], $this->p->mapFunctions());
+        $this->assertEquals(['computeds' => ['State'], 'methods' => ['Actions']], $this->c->mapFunctions());
+        $this->assertEquals(['State'], $this->c->mapFunctions('computeds'));
+        $this->assertEquals(['Actions'], $this->c->mapFunctions('methods'));
     }
 
     /** @test */
-    public function pinia_mapFunction()
+    public function pinia_map_function()
     {
-        $this->assertEquals('useIndexPostsStore, []', $this->p->mapFunction($this->map1));
-        $this->assertEquals('useCustomBuyAllStuffStore, []', $this->p->mapFunction($this->map2));
+        $this->assertEquals('useIndexPostsStore, []', $this->c->mapFunction($this->map1));
+        $this->assertEquals('useCustomBuyAllStuffStore, []', $this->c->mapFunction($this->map2));
     }
 
     /** @test */
@@ -85,7 +87,7 @@ class PiniaTest extends TestCase
 
         $this->assertEquals(
             'import { useIndexPostsStore } from "../../../scripts/Stores/Pages/Posts/useIndexPosts"',
-            $this->p->import($request)
+            $this->c->import($request)
         );
     }
 
@@ -96,7 +98,7 @@ class PiniaTest extends TestCase
 
         $this->assertEquals(
             ["{$base}/views/{$tail}", "{$base}/scripts/Stores/{$tail}/useIndexPosts.js"],
-            $this->p->paths($request)
+            $this->c->paths($request)
         );
     }
 

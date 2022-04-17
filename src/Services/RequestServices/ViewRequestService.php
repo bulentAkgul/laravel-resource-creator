@@ -3,9 +3,9 @@
 namespace Bakgul\ResourceCreator\Services\RequestServices;
 
 use Bakgul\Kernel\Helpers\Settings;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\SetFolder;
+use Bakgul\ResourceCreator\Functions\SetFolder;
 use Bakgul\ResourceCreator\Services\RequestService;
-use Bakgul\ResourceCreator\Tasks\RequestTasks\ExtendMap;
+use Bakgul\ResourceCreator\Tasks\ExtendMap;
 
 class ViewRequestService extends RequestService
 {

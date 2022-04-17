@@ -3,9 +3,9 @@
 namespace Bakgul\ResourceCreator\Services\RequestServices;
 
 use Bakgul\Kernel\Helpers\Settings;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\ConstructPath;
+use Bakgul\Kernel\Functions\ConstructPath;
 use Bakgul\ResourceCreator\Services\RequestService;
-use Bakgul\ResourceCreator\Tasks\RequestTasks\ExtendMap;
+use Bakgul\ResourceCreator\Tasks\ExtendMap;
 
 class CssRequestService extends RequestService
 {

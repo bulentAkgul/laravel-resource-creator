@@ -27,7 +27,7 @@ class VueStore
 
     public function file(array $request): string
     {
-        return "{$this->store->file($request['map'])}.js";
+        return "{$this->store->file($request['map'])}.{$request['attr']['extension']}";
     }
 
     public function code(array $request): array

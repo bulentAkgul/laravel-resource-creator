@@ -4,7 +4,6 @@ namespace Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceServices;
 
 use Bakgul\Kernel\Functions\CallClass;
 use Bakgul\Kernel\Functions\CreateFile;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\GetViewClass;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices\VueViewRequestService;
 use Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceService;
 use Bakgul\ResourceCreator\Vendors\Vue;

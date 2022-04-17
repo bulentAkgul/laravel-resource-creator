@@ -1,6 +1,6 @@
 <?php
 
-namespace Bakgul\ResourceCreator\Functions\RequestFunctions;
+namespace Bakgul\ResourceCreator\Functions;
 
 use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\Kernel\Tasks\ConvertCase;

@@ -9,9 +9,11 @@ class SassCssRegistrationRequestService extends RequestService
 {
     public function handle(array $request): array
     {
-        $request['attr']['target_file'] = Sass::target($request);
+        $sass = new Sass;
 
-        $request['map']['imports'] = Sass::forward($request['map']['name']);
+        $request['attr']['target_file'] = $sass->target($request);
+
+        $request['map']['imports'] = $sass->forward($request['map']['name']);
 
         return $request;
     }

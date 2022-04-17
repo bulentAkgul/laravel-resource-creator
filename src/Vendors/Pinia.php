@@ -2,10 +2,10 @@
 
 namespace Bakgul\ResourceCreator\Vendors;
 
+use Bakgul\Kernel\Functions\UpdateSchema;
 use Bakgul\Kernel\Helpers\Folder;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Helpers\Text;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\UpdateSchema;
 use Bakgul\ResourceCreator\Tasks\SetRelativePath;
 
 class Pinia
@@ -41,9 +41,9 @@ class Pinia
         return Text::replaceByMap($map, $this->schema(true));
     }
 
-    public function mapFunctions()
+    public function mapFunctions(?string $key = '')
     {
-        return ['computeds' => ['State'], 'methods' => ['Actions']];
+        return Settings::resources('pinia.maps' . Text::append($key, '.'));
     }
 
     public function mapFunction($map)

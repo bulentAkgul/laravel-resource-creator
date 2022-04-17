@@ -3,10 +3,11 @@
 namespace Bakgul\ResourceCreator\Services\RequestServices;
 
 use Bakgul\Kernel\Helpers\Path;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\ConstructPath;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\SetFolder;
+use Bakgul\Kernel\Functions\ConstructPath;
+use Bakgul\ResourceCreator\Functions\SetFolder;
 use Bakgul\ResourceCreator\Services\RequestService;
-use Bakgul\ResourceCreator\Tasks\RequestTasks\ExtendMap;
+use Bakgul\ResourceCreator\Tasks\ExtendMap;
+use Bakgul\ResourceCreator\Vendors\Vanilla;
 
 class JsRequestService extends RequestService
 {
@@ -22,6 +23,7 @@ class JsRequestService extends RequestService
     public function extendAttr(array $attr): array
     {
         return array_merge($attr, [
+            'extention' => (new Vanilla)->extension($attr),
             'type' => $this->setType($attr),
             'folder' => SetFolder::_($attr),
             'app_type' => $this->setApp($attr)

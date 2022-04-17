@@ -2,8 +2,8 @@
 
 namespace Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices;
 
-use Bakgul\ResourceCreator\Functions\RequestFunctions\ConstructPath;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\SetFileName;
+use Bakgul\Kernel\Functions\ConstructPath;
+use Bakgul\ResourceCreator\Functions\SetFileName;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestService;
 use Bakgul\ResourceCreator\Domains\VueStore;
 use Bakgul\ResourceCreator\Vendors\Vue;
@@ -35,7 +35,7 @@ class VueViewRequestService extends ViewRequestService
     {
         return array_merge($request['map'], [
             ...(new VueStore)->code($request),
-            ...$this->vue->options($request['attr']['pipeline']['options']),
+            ...$this->vue->options($request['attr']),
             'view' => $this->vue->view($request['attr']['variation']),
         ]);
     }

@@ -4,10 +4,15 @@ namespace Bakgul\ResourceCreator\Vendors;
 
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Helpers\Text;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\ConvertValue;
+use Bakgul\ResourceCreator\Functions\ConvertValue;
 
 class Blade
 {
+    public function vendor()
+    {
+        return 'blade';
+    }
+
     public function stub(array $request): string
     {
         return "blade.{$request['attr']['variation']}.stub";

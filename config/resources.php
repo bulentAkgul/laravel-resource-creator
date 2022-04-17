@@ -95,15 +95,21 @@ return [
             'code_splitting' => true,
             'composable' => true,
             'compositionAPI' => false,
-            'ts' => false,
+            'ts' => true,
         ],
     ],
     'pinia' => [
         'framework' => 'vue',
         'extension' => 'js',
-        'name_schema' => 'use{{ schema }}Store'
+        'name_schema' => 'use{{ schema }}Store',
+        'maps' => ['computeds' => ['State'], 'methods' => ['Actions']]
     ],
     'inertia' => [
         'renderables' => ['index', 'show', 'edit']
+    ],
+    'vuex' => [
+        'framework' => 'vue',
+        'extension' => 'js',
+        'maps' => ['computeds' => ['State', 'Getters'], 'methods' => ['Actions']]
     ]
 ];

@@ -3,9 +3,6 @@
 namespace Bakgul\ResourceCreator\Services;
 
 use Bakgul\Kernel\Concerns\HasRequest;
-use Bakgul\Kernel\Helpers\Path;
-use Bakgul\FileContent\Functions\MakeFile;
-use Bakgul\FileContent\Tasks\CompleteFolders;
 use Bakgul\Kernel\Services\NotExpectedTypeService;
 use Bakgul\ResourceCreator\ResourceCreator;
 use Bakgul\ResourceCreator\Services\ResourceServices\CssResourceService;
@@ -31,19 +28,5 @@ class ResourceService extends ResourceCreator
             'css' => new CssResourceService,
             default => new NotExpectedTypeService
         };
-    }
-
-    protected function isFileNotCreatable(array $attr): bool
-    {
-        return !$attr['force'] && file_exists(Path::glue([$attr['path'], $attr['file']]));
-    }
-
-    protected function callClass(array $request, string $class): bool
-    {
-        if (!class_exists($class)) return false;
-        
-        (new $class)->create($request);
-
-        return true;
     }
 }

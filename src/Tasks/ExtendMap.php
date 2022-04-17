@@ -1,12 +1,12 @@
 <?php
 
-namespace Bakgul\ResourceCreator\Tasks\RequestTasks;
+namespace Bakgul\ResourceCreator\Tasks;
 
+use Bakgul\Kernel\Functions\ConstructName;
 use Bakgul\Kernel\Tasks\ConvertCase;
 use Bakgul\Kernel\Tasks\RequestTasks\ExtendRequestMap;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\ConstructName;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\ConvertValue;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\SetFolder;
+use Bakgul\ResourceCreator\Functions\ConvertValue;
+use Bakgul\ResourceCreator\Functions\SetFolder;
 
 class ExtendMap
 {

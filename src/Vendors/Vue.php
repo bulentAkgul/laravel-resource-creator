@@ -3,47 +3,55 @@
 namespace Bakgul\ResourceCreator\Vendors;
 
 use Bakgul\Kernel\Helpers\Arry;
-use Bakgul\Kernel\Helpers\Path;
+use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Helpers\Text;
-use Illuminate\Support\Str;
+use Bakgul\ResourceCreator\Functions\IsTypescript;
+use Bakgul\ResourceCreator\Tasks\RemoveLines;
+use Illuminate\Support\Arr;
 
 class Vue
 {
-    public function removeOptionsAPI(array $attr): void
+    public function vendor(): string
     {
-        $path = Path::glue([$attr['path'], $attr['file']]);
-
-        $content = file_get_contents($path);
-
-        file_put_contents($path, str_replace(array_filter([
-            $this->block($content, $attr), '{{{{', '}}}}'
-        ]), '', $content));
+        return 'vue';
     }
 
-    private function block($content, $attr)
+    public function stub(string $variation = ''): string
     {
-        return Arry::get($attr['pipeline']['options'], 'compositionAPI')
-            ? Str::between($content, '{{{{', '}}}}')
-            : '';
+        return implode('.', array_filter(['vue', $variation, 'stub']));
     }
 
-    public function stub(string $variation): string
+    public function api(?array $attr = null)
     {
-        return "vue.{$variation}.stub";
+        $cmp = $attr ? Arry::get($attr['pipeline']['options'], 'compositionAPI') : $attr
+            ?? Settings::resources('vue.options.compositionAPI');
+
+        return $cmp ? 'composition' : 'options';
     }
 
-    public function options(array $options): array
-    {
-        return [
-            'setup' => Arry::get($options, 'compositionAPI') ? ' setup' : '',
-            'lang' => Arry::get($options, 'ts') && Arry::get($options, 'compositionAPI') ? ' lang="ts"' : '',
-        ];
-    }
-
-    public function view(string $variation) : string
+    public function view(string $variation): string
     {
         return $variation == 'page'
             ? Text::inject("  <router-view />", PHP_EOL)
             : '';
+    }
+
+    public function options(array $attr): array
+    {
+        return [
+            'setup' =>$this->isComposition($attr) ? ' setup' : '',
+            'lang' => IsTypescript::_($attr) ? ' lang="ts"' : '',
+        ];
+    }
+
+    public function isComposition(array $attr): bool
+    {
+        return Arr::get($attr, 'pipeline.options.compositionAPI')
+            ?? Settings::resources('vue.options.compositionAPI');
+    }
+
+    public function removeOptionsAPI(array $attr): void
+    {
+        RemoveLines::byStr($attr, '{{{{', '}}}}', $this->api($attr) == 'composition');
     }
 }

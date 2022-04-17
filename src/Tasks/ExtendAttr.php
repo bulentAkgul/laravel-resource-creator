@@ -1,11 +1,11 @@
 <?php
 
-namespace Bakgul\ResourceCreator\Tasks\RequestTasks;
+namespace Bakgul\ResourceCreator\Tasks;
 
-use Bakgul\ResourceCreator\Functions\RequestFunctions\IsSharable;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\SetPrefix;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\UpdateParent;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\UpdatePathSchema;
+use Bakgul\ResourceCreator\Functions\IsSharable;
+use Bakgul\ResourceCreator\Functions\SetPrefix;
+use Bakgul\ResourceCreator\Functions\UpdateParent;
+use Bakgul\ResourceCreator\Functions\UpdatePathSchema;
 
 class ExtendAttr
 {

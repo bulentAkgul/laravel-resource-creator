@@ -2,8 +2,8 @@
 
 namespace Bakgul\ResourceCreator\Services\RequestServices\JsRequestServices;
 
-use Bakgul\ResourceCreator\Functions\RequestFunctions\ConstructPath;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\SetFileName;
+use Bakgul\Kernel\Functions\ConstructPath;
+use Bakgul\ResourceCreator\Functions\SetFileName;
 use Bakgul\ResourceCreator\Services\RequestServices\JsRequestService;
 use Bakgul\ResourceCreator\Vendors\Vanilla;
 
@@ -15,12 +15,10 @@ class VanillaJsRequestService extends JsRequestService
     {
         $this->vanilla = new Vanilla;
 
-        return [
-            'attr' => $this->extendAttr($request),
-            'map' => array_merge($request['map'], [
-                'extends' => $this->vanilla->extend($request['attr']),
-            ]),
-        ];
+        $request['attr'] = $this->extendAttr($request);
+        $request['map'] = $this->extendMap($request);
+
+        return $request;
     }
 
     public function extendAttr(array $request): array
@@ -30,5 +28,15 @@ class VanillaJsRequestService extends JsRequestService
             'path' => ConstructPath::_($request),
             'file' => SetFileName::_($request),
         ]);
+    }
+
+    private function extendMap(array $request)
+    {
+        return [
+            ...$request['map'],
+            'extends' => $this->vanilla->extend($request['attr']),
+            'imports' => $this->vanilla->import($request['attr']),
+            'export' => $this->vanilla->export($request['attr']['variation'])
+        ];
     }
 }

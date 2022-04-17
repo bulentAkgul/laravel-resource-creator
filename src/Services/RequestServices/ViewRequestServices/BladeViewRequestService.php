@@ -2,9 +2,9 @@
 
 namespace Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices;
 
+use Bakgul\Kernel\Functions\ConstructPath;
 use Bakgul\Kernel\Tasks\ConvertCase;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\ConstructPath;
-use Bakgul\ResourceCreator\Functions\RequestFunctions\SetFileName;
+use Bakgul\ResourceCreator\Functions\SetFileName;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestService;
 use Bakgul\ResourceCreator\Vendors\Blade;
 
