@@ -23,7 +23,7 @@ class Pinia
     public function schema(bool $withSuffix): string
     {
         $schema = UpdateSchema::_(Settings::resources('pinia.name_schema'), 'schema', Settings::files('js.name_schema'));
-        
+       
         if (!$withSuffix) {
             $schema = Text::changeTail($schema, '', '}}');
         }
@@ -73,10 +73,10 @@ class Pinia
         $to = '';
 
         foreach ($paths as $path) {
-            if (!str_contains($path, DIRECTORY_SEPARATOR . "{$file}.js")) continue;
-
-            $to = $path;
-            break;
+            if (str_contains($path, DIRECTORY_SEPARATOR . "{$file}.js")) {
+                $to = $path;
+                break;
+            }
         }
 
         return [$request['attr']['path'], $to];
