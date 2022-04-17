@@ -92,6 +92,8 @@ return [
         'extension' => 'vue',
         'options' => [
             'store' => 'pinia',
+            'code_splitting' => true,
+            'composable' => true,
             'compositionAPI' => false,
             'ts' => false,
         ],
