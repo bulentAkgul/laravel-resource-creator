@@ -8,10 +8,12 @@ class GetClass
 {
     public static function resource(array $attr, string $namespace): string
     {
+        $category = $attr['category'] == $attr['type'] ? '' : $attr['category'];
+
         return Path::glue([
             $namespace,
             ucfirst($attr['category']) . 'ResourceServices',
-            ucfirst($attr['type']) . ucfirst($attr['category']) . 'ResourceService'
+            ucfirst($attr['type']) . ucfirst($category) . 'ResourceService'
         ], '\\');
     }
 
