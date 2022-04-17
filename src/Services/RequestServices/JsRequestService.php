@@ -13,6 +13,7 @@ class JsRequestService extends RequestService
     public function handle(array $request): array
     {
         $request['attr'] = $this->extendAttr($request['attr']);
+
         $request['map'] = ExtendMap::_($request);
 
         return $request;
@@ -29,7 +30,7 @@ class JsRequestService extends RequestService
 
     private function setType(array $attr)
     {
-        return $attr['type'] == 'blade' ? 'vanilla' : $attr['type'];
+        return $attr['pipeline']['type'] == 'blade' ? 'vanilla' : $attr['pipeline']['type'];
     }
 
     private function setApp(array $attr): string
