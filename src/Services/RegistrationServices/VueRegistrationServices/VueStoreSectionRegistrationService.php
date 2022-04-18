@@ -2,10 +2,9 @@
 
 namespace Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices;
 
-use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\ResourceCreator\Services\RegistrationService;
 use Bakgul\ResourceCreator\Services\RequestServices\RegistrationRequestServices\VueStoreSectionRegistrationRequestService;
-use Illuminate\Support\Str;
+use Bakgul\ResourceCreator\Tasks\CombineImports;
 
 class VueStoreSectionRegistrationService extends RegistrationService
 {
@@ -33,7 +32,7 @@ class VueStoreSectionRegistrationService extends RegistrationService
             fn ($x) => $x != 'mutations' || $this->request['attr']['pipeline']['options']['store'] != 'pinia'
         );
     }
-    
+
     private function lineSpecs()
     {
         return [
@@ -52,55 +51,9 @@ class VueStoreSectionRegistrationService extends RegistrationService
 
     private function combineImports()
     {
-        [$start, $_, $end, $imports] = $this->getImports();
-
-        $this->purifyContent($start, $end);
-
-        $this->regenerateContent($start, $this->groupImports($imports));
-
-        $this->write();
-    }
-
-    private function getImports()
-    {
-        return $this->getCodeLines($this->setLineSpecs($this->lineSpecs()));
-    }
-
-    private function groupImports(array $imports): array
-    {
-        $combined = [];
-
-        foreach ($this->createGroups($imports) as $file => $group) {
-            $combined[] = 'import ' . $this->extendParts($group) . " from {$file}";
-        }
-
-        return $combined;
-    }
-
-    private function extendParts(array $group)
-    {
-        $group = array_reduce($group, fn ($p, $c) => $this->addPart($p, $c), []);
-
-        return (count($group) > 1 ? '{ ' : '') . implode(', ', $group) . (count($group) > 1 ? ' }' : '');
-    }
-
-    private function addPart(array $carry, string $current)
-    {
-        return array_merge($carry, [trim(Str::between($current, 'import', 'from'))]);
-    }
-
-    private function createGroups(array $imports): array
-    {
-        $groups = [];
-
-        foreach ($imports as $import) {
-            $key = trim(Str::between($import, 'from', ';'));
-
-            if (!Arry::has($key, $groups)) $groups[$key] = [];
-
-            $groups[$key][] = $import;
-        }
-
-        return $groups;
+        CombineImports::_(
+            $this->lineSpecs(),
+            $this->request['attr']['target_file']
+        );
     }
 }
