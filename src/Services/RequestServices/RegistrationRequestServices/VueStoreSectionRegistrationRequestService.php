@@ -3,13 +3,16 @@
 namespace Bakgul\ResourceCreator\Services\RequestServices\RegistrationRequestServices;
 
 use Bakgul\Kernel\Helpers\Path;
+use Bakgul\ResourceCreator\Functions\SetFileName;
 use Bakgul\ResourceCreator\Services\RequestService;
 
 class VueStoreSectionRegistrationRequestService extends RequestService
 {
     public function handle(array $request): array
     {
-        $request['attr']['target_file'] = Path::glue([$request['attr']['path'], "{$this->setParent($request['attr'])}.js"]);
+        $request['attr']['target_file'] = Path::glue([
+            $request['attr']['path'], SetFileName::_($request, true)
+        ]);
 
         return $request;
     }

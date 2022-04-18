@@ -3,6 +3,7 @@
 namespace Bakgul\ResourceCreator\Services\RequestServices\RegistrationRequestServices;
 
 use Bakgul\Kernel\Helpers\Path;
+use Bakgul\ResourceCreator\Functions\SetFileName;
 use Bakgul\ResourceCreator\Services\RequestService;
 
 class VueRouteSectionRegistrationRequestService extends RequestService
@@ -11,7 +12,9 @@ class VueRouteSectionRegistrationRequestService extends RequestService
     {
         return [
             'attr' => $a = array_merge($request['attr'], [
-                'target_file' => Path::glue([$request['attr']['path'], "{$this->setParent($request['attr'])}.js"])
+                'target_file' => Path::glue([
+                    $request['attr']['path'], SetFileName::_($request, true)
+                ])
             ]),
             'map' => array_merge($request['map'], [
                 'imports' => 'import ' . $request['map']['name'] . ' from "./' . $request['map']['name'] . '"',

@@ -7,9 +7,10 @@ use Bakgul\ResourceCreator\Tasks\SetCase;
 
 class SetFileName
 {
-    public static function _(array $request): string
+    public static function _(array $request, bool $isParent = false): string
     {
-        return ConvertCase::{SetCase::_($request['attr'])}($request['map']['name'])
-             . ".{$request['attr']['extension']}";
+        return ConvertCase::{SetCase::_($request['attr'])}(
+            $isParent ? $request['attr']['parent']['name'] : $request['map']['name']
+        ) . ".{$request['attr']['extension']}";
     }
 }
