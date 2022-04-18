@@ -12,7 +12,8 @@ class VueStore
 {
     private $store;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->store = match (Settings::resources("vue.options.store")) {
             'pinia' => new Pinia,
             'vuex' => new Vuex,
@@ -81,7 +82,7 @@ class VueStore
 
     private function setFileImports(array $request): string
     {
-        return match($this->store->vendor()) {
+        return match ($this->store->vendor()) {
             'pinia' => $this->store->import($request),
             default => ''
         };

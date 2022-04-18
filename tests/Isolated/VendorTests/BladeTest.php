@@ -44,7 +44,7 @@ class BladeTest extends TestCase
         $subs = ['one', 'two', 'three'];
 
         $this->assertEquals('', $this->c->extend(['variation' => 'not_section']));
-        
+
         $this->assertEquals(implode('.', [...$subs, 'users']), $this->c->extend([
             'variation' => 'section',
             'path' => base_path(Settings::folders('view') . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $subs)),

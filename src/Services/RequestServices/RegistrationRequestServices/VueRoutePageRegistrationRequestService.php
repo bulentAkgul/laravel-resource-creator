@@ -21,7 +21,7 @@ class VueRoutePageRegistrationRequestService extends RequestService
         ];
     }
 
-    private function setTargetFile(string $path): string 
+    private function setTargetFile(string $path): string
     {
         $folder = Settings::folders('js');
         $file = Settings::standalone('laravel') ? 'router' : 'routes';

@@ -12,7 +12,7 @@ class CssRequestService extends RequestService
     public function handle(array $request): array
     {
         $request['attr']['type'] = Settings::resourceOptions('css');
-        
+
         $request['map'] = ExtendMap::_($request);
 
         $request['attr']['path'] = ConstructPath::_($request);

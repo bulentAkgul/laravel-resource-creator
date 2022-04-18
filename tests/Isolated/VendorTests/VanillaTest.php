@@ -85,7 +85,7 @@ class VanillaTest extends TestCase
     public function vanilla_import()
     {
         $this->assertEquals('', $this->c->import(['variation' => 'not_section']));
-        
+
         $this->assertEquals(
             'import StoreUsers from "./' . ConvertCase::snake($this->name) . '";' . "\n\n",
             $this->c->import([

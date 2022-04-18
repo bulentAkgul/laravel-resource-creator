@@ -42,8 +42,7 @@ class CreateBackendFiles
 
     private static function hasNoClassPair(array $request): bool
     {
-        return self::getType($request) != 'blade' || (
-            !$request['class'] && $request['extra'] != 'livewire'
+        return self::getType($request) != 'blade' || (!$request['class'] && $request['extra'] != 'livewire'
         );
     }
 

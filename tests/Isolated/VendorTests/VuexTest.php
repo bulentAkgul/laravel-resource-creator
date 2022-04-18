@@ -2,7 +2,6 @@
 
 namespace Bakgul\ResourceCreator\Tests\Isolated\VendorTests;
 
-use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Tests\TestCase;
 use Bakgul\ResourceCreator\Vendors\Vuex;
 

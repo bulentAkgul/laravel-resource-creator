@@ -49,7 +49,7 @@ class VueJsResourceService extends JsResourceService
 
     private function registrationService($attr, $role): ?object
     {
-        return match(true) {
+        return match (true) {
             $role == 'store' && $attr['variation'] == 'page' => new VueStorePageRegistrationService,
             $role == 'store' && $attr['variation'] == 'section' => new VueStoreSectionRegistrationService,
             $role == 'route' && $attr['variation'] == 'page' => new VueRoutePageRegistrationService,

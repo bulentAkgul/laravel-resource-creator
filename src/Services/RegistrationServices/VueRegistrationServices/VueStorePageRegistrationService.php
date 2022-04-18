@@ -39,7 +39,7 @@ class VueStorePageRegistrationService extends RegistrationService
         return [
             'start' => $this->sl ? ["{$this->part}: {", 0] : ["export default", 1],
             'isSortable' => true,
-            'repeat' => 1 
+            'repeat' => 1
         ];
     }
 }

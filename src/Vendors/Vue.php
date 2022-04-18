@@ -39,7 +39,7 @@ class Vue
     public function options(array $attr): array
     {
         return [
-            'setup' =>$this->isComposition($attr) ? ' setup' : '',
+            'setup' => $this->isComposition($attr) ? ' setup' : '',
             'lang' => IsTypescript::_($attr) ? ' lang="ts"' : '',
         ];
     }

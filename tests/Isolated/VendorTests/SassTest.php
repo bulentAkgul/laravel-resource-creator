@@ -13,7 +13,7 @@ class SassTest extends TestCase
     private $c;
     private $name = 'store-users';
     private $ext = 'scss';
-    
+
     public function __construct()
     {
         $this->c = new Sass;

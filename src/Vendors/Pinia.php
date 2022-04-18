@@ -23,11 +23,11 @@ class Pinia
     public function schema(bool $withSuffix): string
     {
         $schema = UpdateSchema::_(Settings::resources('pinia.name_schema'), 'schema', Settings::files('js.name_schema'));
-       
+
         if (!$withSuffix) {
             $schema = Text::changeTail($schema, '', '}}');
         }
-        
+
         return UpdateSchema::_($schema, 'name', 'label');
     }
 
