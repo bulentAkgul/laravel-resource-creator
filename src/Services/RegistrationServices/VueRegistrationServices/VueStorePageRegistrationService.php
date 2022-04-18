@@ -13,6 +13,8 @@ class VueStorePageRegistrationService extends RegistrationService
 
     public function handle(array $request): void
     {
+        if (Settings::resources('vue.options.store') == 'pinia') return;
+        
         $this->prepare();
 
         $this->request = (new VueStorePageRegistrationRequestService)->handle($request);
