@@ -39,7 +39,9 @@ return [
         'category' => 'js',
         'convention' => 'pascal',
         'extension' => 'js',
-        'options' => [],
+        'options' => [
+            'extensions' => ['js', 'ts']
+        ],
     ],
     'less' => [
         'category' => 'css',
@@ -91,10 +93,9 @@ return [
         'convention' => 'pascal',
         'extension' => 'vue',
         'options' => [
-            'store' => 'vuex',
-            'code_splitting' => true,
-            'composable' => true,
-            'compositionAPI' => false,
+            'store' => 'pinia',
+            'code_splitting' => false,
+            'compositionAPI' => true,
             'ts' => true,
         ],
     ],
