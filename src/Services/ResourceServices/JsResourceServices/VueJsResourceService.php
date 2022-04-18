@@ -19,11 +19,11 @@ class VueJsResourceService extends JsResourceService
         foreach (['store', 'route'] as $role) {
             if ($this->isNotRequired($role, $request)) continue;
 
-            $request = (new VueJsRequestService($role))->handle($request);
+            $newRequest = (new VueJsRequestService($role))->handle($request);
 
-            CreateFile::_($request);
+            CreateFile::_($newRequest);
 
-            $this->registrationService($request['attr'], $role)?->handle($request);
+            $this->registrationService($newRequest['attr'], $role)?->handle($newRequest);
         }
     }
 
