@@ -18,7 +18,7 @@ class ExtendAttr
             'parent' => UpdateParent::_($attr),
             'path' => UpdatePathSchema::_($attr, 'path'),
             'path_schema' => UpdatePathSchema::_($attr, 'path_schema'),
-            'prefix' => SetPrefix::_($attr['variation'])
+            'prefix' => SetPrefix::_($attr['variation']),
         ];
     }
 }

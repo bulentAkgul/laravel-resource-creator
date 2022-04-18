@@ -24,7 +24,7 @@ class SetRelativePath
     private static function purify(array $paths): array
     {
         $sames = 0;
-
+        
         foreach ($paths[0] as $i => $name) {
             if ($paths[1][$i] == $name) $sames++;
             else break;

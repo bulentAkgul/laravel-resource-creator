@@ -2,6 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Tests\Feature;
 
+use Bakgul\FileContent\Tasks\CompleteFolders;
 use Bakgul\Kernel\Tests\Tasks\SetupTest;
 use Bakgul\Kernel\Tests\TestCase;
 use Bakgul\ResourceCreator\Vendors\Pinia;
@@ -13,8 +14,8 @@ class DenemeTest extends TestCase
     {
         $this->testPackage = (new SetupTest)();
 
-        $this->artisan('create:resource posts view:page testing admin');
-
+        $this->artisan('create:resource posts:index.store view:page testing admin');
+        
         $this->assertTrue(true);
     }
 
