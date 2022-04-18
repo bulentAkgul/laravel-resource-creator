@@ -3,19 +3,18 @@
 return [
     'view' => [
         'family' => 'resources',
-        'name_schema' => '{{ prefix }}{{ name }}{{ task }}',
-        'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ hierarchy }}{{ folder }}{{ subs }}',
+        'name_schema' => '{{ prefix }}{{ name }}{{ task }}{{ wrapper }}',
+        'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ folder }}{{ subs }}',
         'tasks' => ['', 'index', 'store', 'update', 'destroy'],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
         'roles' => ['', 'livewire'],
         'name_count' => 'X',
-        'pairs' => [''],
-        // 'pairs' => ['css', 'js'],
+        'pairs' => ['css', 'js'],
     ],
     'js' => [
         'family' => 'resources',
         'name_schema' => '{{ prefix }}{{ name }}{{ task }}{{ wrapper }}',
-        'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ role }}{{ variation }}{{ hierarchy }}{{ folder }}{{ subs }}',
+        'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ role }}{{ variation }}{{ folder }}{{ subs }}',
         'tasks' => ['', 'index', 'store', 'update', 'destroy'],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
         'roles' => ['', 'class', 'store', 'route'],
@@ -25,7 +24,7 @@ return [
     'css' => [
         'family' => 'resources',
         'name_schema' => '{{ prefix }}{{ name }}{{ task }}{{ wrapper }}',
-        'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ hierarchy }}{{ folder }}{{ subs }}',
+        'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ folder }}{{ subs }}',
         'tasks' => ['', 'index', 'store', 'update', 'destroy'],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
         'roles' => [''],
