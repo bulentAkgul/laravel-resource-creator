@@ -9,6 +9,8 @@ use Bakgul\FileContent\Tasks\GetCodeBlock;
 use Bakgul\FileContent\Tasks\GetCodeLine;
 use Bakgul\FileContent\Tasks\WriteToFile;
 use Bakgul\Kernel\Helpers\Arry;
+use Bakgul\ResourceCreator\Functions\SetBlockSpecs;
+use Bakgul\ResourceCreator\Functions\SetLineSpecs;
 
 class Register
 {
@@ -50,30 +52,9 @@ class Register
 
     private static function insert($lineSpecs, $blockSpecs, $key, $only): void
     {
-        if ($only != 'block') self::insertLines(self::setLine($lineSpecs));
+        if ($only != 'block') self::insertLines(SetLineSpecs::_($lineSpecs));
 
-        if ($only != 'line') self::insertBlock(self::setBlock($blockSpecs), key: $key);
-    }
-
-    private static function setLine(array $specs)
-    {
-        return array_merge([
-            'isStrict' => false,
-            'part' => '',
-            'repeat' => 0,
-            'isSortable' => true,
-            'isEmpty' => false
-        ], $specs);
-    }
-
-    private static function setBlock(array $specs)
-    {
-        return array_merge([
-            'end' => ['}', 0],
-            'isStrict' => true,
-            'repeat' => 1,
-            'isSortable' => false
-        ], $specs);
+        if ($only != 'line') self::insertBlock(SetBlockSpecs::_($blockSpecs), key: $key);
     }
 
     private static function insertLines(array $specs): void
