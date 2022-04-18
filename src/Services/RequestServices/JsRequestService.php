@@ -4,17 +4,16 @@ namespace Bakgul\ResourceCreator\Services\RequestServices;
 
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Functions\ConstructPath;
+use Bakgul\ResourceCreator\Functions\IsTypescript;
 use Bakgul\ResourceCreator\Functions\SetFolder;
 use Bakgul\ResourceCreator\Services\RequestService;
 use Bakgul\ResourceCreator\Tasks\ExtendMap;
-use Bakgul\ResourceCreator\Vendors\Vanilla;
 
 class JsRequestService extends RequestService
 {
     public function handle(array $request): array
     {
         $request['attr'] = $this->extendAttr($request['attr']);
-
         $request['map'] = ExtendMap::_($request);
 
         return $request;
@@ -23,11 +22,16 @@ class JsRequestService extends RequestService
     public function extendAttr(array $attr): array
     {
         return array_merge($attr, [
-            'extention' => (new Vanilla)->extension($attr),
+            'extension' => $this->setExtension($attr),
             'type' => $this->setType($attr),
             'folder' => SetFolder::_($attr),
             'app_type' => $this->setApp($attr)
         ]);
+    }
+
+    private function setExtension(array $attr): string
+    {
+        return IsTypescript::_($attr) ? 'ts' : 'js';
     }
 
     private function setType(array $attr)
@@ -42,8 +46,10 @@ class JsRequestService extends RequestService
 
     protected function updatePath(array $request, string $tail): string
     {
-        $request['attr']['path'] = Path::head($request['map']['package'], $request['map']['family']) . $tail;
-
+        if ($request['attr']['role'] == 'route') {
+            $request['attr']['path'] = Path::head($request['map']['package'], $request['map']['family']) . $tail;
+        }
+        
         return ConstructPath::_($request);
     }
 }

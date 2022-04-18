@@ -5,7 +5,7 @@ export default () => {
   return {
     path: "{{ route }}",
     name: "{{ name }}",
-    component: {{ name_pascal }},
+    component: {{ component }},
     props: true,
     children: [],
   }

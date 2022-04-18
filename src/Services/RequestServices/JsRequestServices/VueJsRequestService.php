@@ -11,7 +11,7 @@ use Bakgul\ResourceCreator\Services\RequestServices\JsRequestService;
 class VueJsRequestService extends JsRequestService
 {
     private $service;
-    
+
     public function __construct(private string $role) {}
 
     public function handle(array $request): array
@@ -48,20 +48,37 @@ class VueJsRequestService extends JsRequestService
         return array_merge($request['map'], [
             'id' => ConvertValue::_($request['map']['name'], 'camel'),
             'role' => ConvertValue::_($request['attr'], 'role', false),
-            'route' => $this->setRoute($request),
-            'imports' => '',
         ]);
     }
 
     private function setRoute(array $request)
     {
-        return $this->role == 'route' ? $this->service->route($request) : '';
+        return $this->role == 'route' ? $this->service->route($request['attr']) : '';
     }
 
     public function modify(array $request): array
     {
-        $request['attr']['path'] = $this->updatePath($request, $this->service->schema($request['attr']));
+        $request['attr']['path'] = $this->setPath($request);
 
+        $request['map']['route'] = $this->setRoute($request);
+        $request['map']['imports'] = $this->setImports($request);
+        $request['map']['component'] = $this->setComponent($request);
+        
         return $request;
+    }
+
+    private function setPath(array $request): string
+    {
+        return $this->updatePath($request, $this->service->schema($request['attr']));
+    }
+
+    private function setImports(array $request): string
+    {
+        return $this->role == 'route' ? $this->service->imports($request) : '';
+    }
+
+    private function setComponent(array $request): string
+    {
+        return $this->role == 'route' ? $this->service->component($request) : '';
     }
 }
