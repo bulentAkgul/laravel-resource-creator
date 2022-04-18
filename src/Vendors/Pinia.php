@@ -6,6 +6,7 @@ use Bakgul\Kernel\Functions\UpdateSchema;
 use Bakgul\Kernel\Helpers\Folder;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Helpers\Text;
+use Bakgul\ResourceCreator\Functions\IsFilesPath;
 use Bakgul\ResourceCreator\Tasks\SetRelativePath;
 
 class Pinia
@@ -73,7 +74,7 @@ class Pinia
         $to = '';
 
         foreach ($paths as $path) {
-            if (str_contains($path, DIRECTORY_SEPARATOR . "{$file}.js")) {
+            if (IsFilesPath::_($file, 'js', $path)) {
                 $to = $path;
                 break;
             }
