@@ -6,6 +6,7 @@ use Bakgul\Kernel\Concerns\HasPreparation;
 use Bakgul\Kernel\Concerns\HasRequest;
 use Bakgul\Kernel\Concerns\Sharable;
 use Bakgul\Evaluator\Concerns\ShouldBeEvaluated;
+use Bakgul\Evaluator\Services\ResourceCommandEvaluationService;
 use Bakgul\Kernel\Tasks\MakeFileList;
 use Bakgul\ResourceCreator\Services\ResourceService;
 use Bakgul\ResourceCreator\Tasks\CreateBackendFiles;
@@ -43,15 +44,15 @@ class CreateResourceCommand extends Command
     {
         $this->prepareRequest();
 
-        $this->evaluate();
+        // $this->evaluate();
 
-        if ($this->stop()) return $this->terminate();
+        // if ($this->stop()) return $this->terminate();
 
         $queue = ModifyFileList::_(MakeFileList::_($this->request));
 
         $this->createFiles($queue);
 
-        CreateBackendFiles::_($this->request, $queue);
+        // CreateBackendFiles::_($this->request, $queue);
     }
 
     private function createFiles(array $queue)

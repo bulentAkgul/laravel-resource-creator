@@ -93,7 +93,7 @@ return [
         'convention' => 'pascal',
         'extension' => 'vue',
         'options' => [
-            'store' => 'pinia',
+            'store' => 'vuex',
             'code_splitting' => false,
             'compositionAPI' => true,
             'ts' => true,

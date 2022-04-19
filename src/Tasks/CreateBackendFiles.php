@@ -2,6 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Tasks;
 
+use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\Kernel\Helpers\Isolation;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
@@ -17,7 +18,7 @@ class CreateBackendFiles
         Artisan::call(self::createCommand($request));
     }
 
-    private static function isNotCreatable(array $request, array $queue): bool
+    public static function isNotCreatable(array $request, array $queue): bool
     {
         return self::isNotView($request['type'])
             || self::hasNoFileCreator()
@@ -89,7 +90,7 @@ class CreateBackendFiles
     private static function setType(array $request)
     {
         return (match (true) {
-            $request['extra'] == 'livewire' => 'livewire',
+            Arry::get($request, 'extra') == 'livewire' => 'livewire',
             $request['type'] == 'page' => 'controller',
             default => 'component',
         }) . self::appendVariation($request);
