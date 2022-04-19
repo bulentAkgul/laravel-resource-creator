@@ -91,7 +91,7 @@ class CreateBackendFiles
     {
         return (match (true) {
             Arry::get($request, 'extra') == 'livewire' => 'livewire',
-            $request['type'] == 'page' => 'controller',
+            $request['type'] == 'view:page' => 'controller',
             default => 'component',
         }) . self::appendVariation($request);
     }
