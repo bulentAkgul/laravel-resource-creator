@@ -44,15 +44,15 @@ class CreateResourceCommand extends Command
     {
         $this->prepareRequest();
 
-        // $this->evaluate();
+        $this->evaluate();
 
-        // if ($this->stop()) return $this->terminate();
+        if ($this->stop()) return $this->terminate();
 
         $queue = ModifyFileList::_(MakeFileList::_($this->request));
 
         $this->createFiles($queue);
 
-        // CreateBackendFiles::_($this->request, $queue);
+        CreateBackendFiles::_($this->request, $queue);
     }
 
     private function createFiles(array $queue)
