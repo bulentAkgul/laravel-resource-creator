@@ -95,7 +95,7 @@ return [
         'options' => [
             'store' => 'vuex',
             'code_splitting' => false,
-            'compositionAPI' => true,
+            'compositionAPI' => false,
             'ts' => true,
         ],
     ],
