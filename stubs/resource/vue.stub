@@ -3,7 +3,7 @@
 <script{{ setup }}{{ lang }}>
 {{ imports }}
 {{{{export default {
-  name: "{{ name_pascal }}",
+  name: "{{ name_pascal }}",{{ layout }}
   components: {},
   mixins: [],
   props: {},
@@ -18,3 +18,4 @@
   methods: {{{ methods }}},
 };}}}}
 </script>
+{{ script }}

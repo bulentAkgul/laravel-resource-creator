@@ -29,9 +29,9 @@ class Vue
         return $cmp ? 'composition' : 'options';
     }
 
-    public function view(string $variation): string
+    public function view(array $attr): string
     {
-        return $variation == 'page'
+        return $attr['variation'] == 'page' && Settings::apps("{$attr['app_key']}.router") == 'vue-router'
             ? Text::inject("  <router-view />", PHP_EOL)
             : '';
     }

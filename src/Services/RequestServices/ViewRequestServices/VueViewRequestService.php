@@ -36,7 +36,7 @@ class VueViewRequestService extends ViewRequestService
         return array_merge($request['map'], [
             ...(new VueStore)->code($request),
             ...$this->vue->options($request['attr']),
-            'view' => $this->vue->view($request['attr']['variation']),
+            'view' => $this->vue->view($request['attr']),
         ]);
     }
 }
