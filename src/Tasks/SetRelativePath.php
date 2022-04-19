@@ -26,7 +26,7 @@ class SetRelativePath
         $sames = 0;
         
         foreach ($paths[0] as $i => $name) {
-            if ($paths[1][$i] == $name) $sames++;
+            if (Arry::get($paths[1], $i) == $name) $sames++;
             else break;
         }
 
@@ -35,7 +35,7 @@ class SetRelativePath
 
     private static function dropFile(array $paths): array
     {
-        return array_map(fn ($x) => str_contains($x[array_key_last($x)], '.') ? Arry::drop($x) : $x, $paths);
+        return array_map(fn ($x) => $x && str_contains($x[array_key_last($x)], '.') ? Arry::drop($x) : $x, $paths);
     }
 
     private static function isTheSameFolder(array $from, array $to)
