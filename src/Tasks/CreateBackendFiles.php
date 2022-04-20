@@ -2,7 +2,6 @@
 
 namespace Bakgul\ResourceCreator\Tasks;
 
-use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\Kernel\Helpers\Isolation;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
@@ -14,7 +13,7 @@ class CreateBackendFiles
     public static function _(array $request, array $queue)
     {
         if (self::isNotCreatable($request, $queue)) return;
-
+        ray(self::createCommand($request));
         Artisan::call(self::createCommand($request));
     }
 
@@ -43,8 +42,8 @@ class CreateBackendFiles
 
     private static function hasNoClassPair(array $request): bool
     {
-        return self::getType($request) != 'blade' || (!$request['class'] && $request['extra'] != 'livewire'
-        );
+        return self::getType($request) != 'blade'
+            || (!$request['class'] && Isolation::extra($request['type']) != 'livewire');
     }
 
     private static function getType($request)
@@ -68,7 +67,21 @@ class CreateBackendFiles
         ]));
     }
 
-    private static function setName(array $request)
+    private static function setName(array $request): string
+    {
+        return self::prependVariationAsSubfolder($request)
+            . self::getNameFromOriginalCommand($request);
+    }
+
+    private static function prependVariationAsSubfolder(array $request): string
+    {
+        return Text::prepend(
+            self::isLivewire($request) ? Isolation::variation($request['type']) : '',
+            Settings::seperators('folder')
+        );
+    }
+
+    private static function getNameFromOriginalCommand(array $request): string
     {
         return Text::changeTail(
             $request['name'],
@@ -90,10 +103,15 @@ class CreateBackendFiles
     private static function setType(array $request)
     {
         return (match (true) {
-            Arry::get($request, 'extra') == 'livewire' => 'livewire',
+            self::isLivewire($request) => 'livewire',
             $request['type'] == 'view:page' => 'controller',
             default => 'component',
         }) . self::appendVariation($request);
+    }
+
+    private static function isLivewire(array $request): bool
+    {
+        return Isolation::extra($request['type']) == 'livewire';
     }
 
     private static function appendVariation($request)
