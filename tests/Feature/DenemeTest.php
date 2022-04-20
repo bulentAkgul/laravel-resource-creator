@@ -12,7 +12,7 @@ class DenemeTest extends TestCase
     {
         $this->testPackage = (new SetupTest)();
 
-        $this->artisan('create:resource posts view:page testing admin');
+        $this->artisan('create:resource posts view:module:livewire testing web');
         
         $this->assertTrue(true);
     }

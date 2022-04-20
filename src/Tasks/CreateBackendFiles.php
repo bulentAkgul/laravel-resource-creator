@@ -13,7 +13,7 @@ class CreateBackendFiles
     public static function _(array $request, array $queue)
     {
         if (self::isNotCreatable($request, $queue)) return;
-        ray(self::createCommand($request));
+
         Artisan::call(self::createCommand($request));
     }
 
