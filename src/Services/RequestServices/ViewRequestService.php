@@ -13,7 +13,7 @@ class ViewRequestService extends RequestService
     {
         $request['attr'] = $this->extendAttr($request['attr']);
         $request['map'] = ExtendMap::_($request);
-        
+
         return $request;
     }
 
@@ -30,6 +30,6 @@ class ViewRequestService extends RequestService
 
     private function setType(array $attr): string
     {
-        return $attr['extra'] ?: $attr['app_type'];
+        return $attr['extra'] && Settings::resources($attr['extra']) ? $attr['extra'] : $attr['app_type'];
     }
 }
