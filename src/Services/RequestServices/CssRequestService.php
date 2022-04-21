@@ -5,7 +5,7 @@ namespace Bakgul\ResourceCreator\Services\RequestServices;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Functions\ConstructPath;
 use Bakgul\ResourceCreator\Services\RequestService;
-use Bakgul\ResourceCreator\Tasks\ExtendMap;
+use Bakgul\ResourceCreator\Tasks\ExtendResourceMap;
 
 class CssRequestService extends RequestService
 {
@@ -13,7 +13,7 @@ class CssRequestService extends RequestService
     {
         $request['attr']['type'] = Settings::resourceOptions('css');
 
-        $request['map'] = ExtendMap::_($request);
+        $request['map'] = ExtendResourceMap::_($request);
 
         $request['attr']['path'] = ConstructPath::_($request);
 

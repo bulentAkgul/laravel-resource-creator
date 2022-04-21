@@ -5,14 +5,14 @@ namespace Bakgul\ResourceCreator\Services\RequestServices;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\ResourceCreator\Functions\SetFolder;
 use Bakgul\ResourceCreator\Services\RequestService;
-use Bakgul\ResourceCreator\Tasks\ExtendMap;
+use Bakgul\ResourceCreator\Tasks\ExtendResourceMap;
 
 class ViewRequestService extends RequestService
 {
     public function handle(array $request): array
     {
         $request['attr'] = $this->extendAttr($request['attr']);
-        $request['map'] = ExtendMap::_($request);
+        $request['map'] = ExtendResourceMap::_($request);
 
         return $request;
     }
