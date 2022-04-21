@@ -8,9 +8,9 @@ use Bakgul\FileContent\Tasks\ExtendCodeLine;
 use Bakgul\FileContent\Tasks\GetCodeBlock;
 use Bakgul\FileContent\Tasks\GetCodeLine;
 use Bakgul\FileContent\Tasks\WriteToFile;
+use Bakgul\Kernel\Functions\SetBlockSpecs;
+use Bakgul\Kernel\Functions\SetLineSpecs;
 use Bakgul\Kernel\Helpers\Arry;
-use Bakgul\ResourceCreator\Functions\SetBlockSpecs;
-use Bakgul\ResourceCreator\Functions\SetLineSpecs;
 
 class Register
 {

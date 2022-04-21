@@ -6,7 +6,7 @@ use Bakgul\FileContent\Helpers\Content;
 use Bakgul\FileContent\Tasks\GetCodeLine;
 use Bakgul\FileContent\Tasks\WriteToFile;
 use Bakgul\Kernel\Helpers\Arry;
-use Bakgul\ResourceCreator\Functions\SetLineSpecs;
+use Bakgul\Kernel\Functions\SetLineSpecs;
 use Illuminate\Support\Str;
 
 class CombineImports
