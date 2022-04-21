@@ -13,17 +13,12 @@ class VueRoutePageRegistrationService extends RegistrationService
 
     public function handle(array $request): void
     {
-        $this->prepare();
+        $this->sl = Settings::standalone('laravel');
+        $this->part = $this->sl ? 'children' : 'return';
 
         $this->request = (new VueRoutePageRegistrationRequestService)->handle($request);
 
         $this->register($this->lineSpecs(), $this->blockSpecs(), $this->part);
-    }
-
-    private function prepare()
-    {
-        $this->sl = Settings::standalone('laravel');
-        $this->part = $this->sl ? 'children' : 'return';
     }
 
     private function lineSpecs()
@@ -40,8 +35,6 @@ class VueRoutePageRegistrationService extends RegistrationService
             'start' => $this->sl ? ["{$this->part}: [", 0] : ["export default", 1],
             'end' => [']', 0],
             'part' => $this->part,
-            'repeat' => 1,
-            'isSortable' => false,
             'bracket' => '[]'
         ];
     }
