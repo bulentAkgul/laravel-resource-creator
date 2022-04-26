@@ -9,7 +9,7 @@ class SetPrefix
     public static function _(string $variation): string
     {
         return Settings::resourceOptions('use_prefix')
-            ? Settings::prefixes($variation)
+            ? Settings::prefixes($variation) ?? ''
             : '';
     }
 }

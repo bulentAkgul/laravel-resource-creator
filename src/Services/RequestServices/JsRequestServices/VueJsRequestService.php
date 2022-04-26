@@ -38,8 +38,8 @@ class VueJsRequestService extends JsRequestService
     {
         return array_merge($request['attr'], [
             'role' => $this->role,
-            'stub' => $this->service->stub($request),
-            'file' => $this->service->file($request)
+            'stub' => $this->service?->stub($request),
+            'file' => $this->service?->file($request)
         ]);
     }
 
@@ -53,7 +53,7 @@ class VueJsRequestService extends JsRequestService
 
     private function setRoute(array $request)
     {
-        return $this->role == 'route' ? $this->service->route($request['attr']) : '';
+        return $this->role == 'route' ? $this->service?->route($request['attr']) : '';
     }
 
     public function modify(array $request): array
@@ -69,16 +69,16 @@ class VueJsRequestService extends JsRequestService
 
     private function setPath(array $request): string
     {
-        return $this->updatePath($request, $this->service->schema($request['attr']));
+        return $this->updatePath($request, $this->service?->schema($request['attr']) ?? '');
     }
 
     private function setImports(array $request): string
     {
-        return $this->role == 'route' ? $this->service->imports($request) : '';
+        return $this->role == 'route' ? $this->service?->imports($request) : '';
     }
 
     private function setComponent(array $request): string
     {
-        return $this->role == 'route' ? $this->service->component($request) : '';
+        return $this->role == 'route' ? $this->service?->component($request) : '';
     }
 }
