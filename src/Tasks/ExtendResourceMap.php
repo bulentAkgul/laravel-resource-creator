@@ -19,11 +19,10 @@ class ExtendResourceMap
         return [
             ...$map,
             'variation' => self::setVariation($request['attr']),
-            'container' => self::setContainer($request['attr']),
+            'container' => Folder::get($request['attr']['category']),
             'label' => ConvertValue::_($request['attr'], 'name'),
             'name' => $n = ConstructName::_($request['attr'], $map),
             'name_pascal' => ConvertCase::pascal($n),
-            'container' => ConvertCase::kebab($map['container']),
             'folder' => SetFolder::_($request['attr']),
             'wrapper' => ConvertValue::_($request['attr'], 'wrapper'),
             'role' => '',
@@ -33,12 +32,5 @@ class ExtendResourceMap
     private static function setVariation(array $attr): string
     {
         return ConvertCase::{$attr['convention']}(Settings::folders($attr['variation']), false);
-    }
-
-    private static function setContainer(array $attr)
-    {
-        $folder = Folder::get($attr['category']);
-
-        return strtoupper($folder) == $folder ? $folder : ConvertCase::{$attr['convention']}($folder);
     }
 }
