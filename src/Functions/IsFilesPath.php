@@ -8,7 +8,7 @@ class IsFilesPath
 {
     public static function _(string $file, string $type, string $path): bool
     {
-        foreach (GetExtensions::_($type)  as $ext) {
+        foreach (GetExtension::_($type)  as $ext) {
             if (str_contains($path, DIRECTORY_SEPARATOR . "{$file}.{$ext}")) {
                 return true;
             }

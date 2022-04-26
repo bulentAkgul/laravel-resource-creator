@@ -4,7 +4,7 @@ namespace Bakgul\ResourceCreator\Functions;
 
 use Bakgul\Kernel\Helpers\Settings;
 
-class GetExtensions
+class GetExtension
 {
     public static function _(string $type): array
     {
