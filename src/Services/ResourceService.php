@@ -2,7 +2,6 @@
 
 namespace Bakgul\ResourceCreator\Services;
 
-use Bakgul\Kernel\Concerns\HasRequest;
 use Bakgul\Kernel\Services\NotExpectedTypeService;
 use Bakgul\ResourceCreator\ResourceCreator;
 use Bakgul\ResourceCreator\Services\ResourceServices\CssResourceService;
@@ -11,8 +10,6 @@ use Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceService;
 
 class ResourceService extends ResourceCreator
 {
-    use HasRequest;
-
     public function create(array $request): void
     {
         $request = (new RequestService)->handle($request);
