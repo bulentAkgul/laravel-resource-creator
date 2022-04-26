@@ -30,7 +30,10 @@ class Inertia
 
     public function imports(array $request): string
     {
-        return $request['map']['imports'] . PHP_EOL . $this->importLayout($request['attr']);
+        return implode(PHP_EOL, [
+            $request['map']['imports'],
+            $this->importLayout($request['attr'], true)
+        ]);
     }
 
     public function script(array $attr): string
@@ -40,17 +43,30 @@ class Inertia
         return implode(PHP_EOL, [
             '',
             '<script>',
-            $this->importLayout($attr),
-            "export default {",
-            "  layout: Layout",
-            "}",
+            $this->setLayout($attr),
             "</script>"
         ]);
     }
 
-    private function importLayout(array $attr): string
+    private function setLayout(array $attr): string
     {
-        return "import Layout from {$this->relativePathToLayout($attr)};";
+        return Settings::resources("{$attr['app_type']}.options.code_splitting")
+            ? implode(PHP_EOL, [
+                "export default { ",
+                "  Layout: import('{$this->importLayout($attr, true)}')",
+                "};"
+            ])
+            : $this->importLayout($attr, false);
+    }
+
+    private function importLayout(array $attr, $splittable): string
+    {
+        return $splittable
+            ? $this->relativePathToLayout($attr)
+            : implode(PHP_EOL, [
+                "import Layout from {$this->relativePathToLayout($attr)}",
+                "export default { Layout }"
+            ]);
     }
 
     private function relativePathToLayout(array $attr): string
