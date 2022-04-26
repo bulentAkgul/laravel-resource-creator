@@ -30,6 +30,8 @@ class ViewRequestService extends RequestService
 
     private function setType(array $attr): string
     {
+        if ($attr['variation'] == 'root') return 'blade';
+        
         return $attr['extra'] && Settings::resources($attr['extra']) ? $attr['extra'] : $attr['app_type'];
     }
 }

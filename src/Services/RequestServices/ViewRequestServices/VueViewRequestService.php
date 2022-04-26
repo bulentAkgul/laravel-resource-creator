@@ -26,9 +26,16 @@ class VueViewRequestService extends ViewRequestService
     {
         return array_merge($request['attr'], [
             'file' => SetFileName::_($request),
-            'path' => ConstructPath::_($request),
+            'path' => $this->setPath($request),
             'stub' => $this->vue->stub($request['attr']['variation']),
         ]);
+    }
+
+    private function setPath(array $request): string
+    {
+        $request['map']['variation'] = $request['attr']['variation'] == 'layout' ? '' : $request['map']['variation'];
+
+        return ConstructPath::_($request);
     }
 
     protected function extendMap(array $request): array

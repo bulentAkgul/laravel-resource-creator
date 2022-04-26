@@ -11,10 +11,25 @@ use Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices
 use Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices\VueStoreSectionRegistrationService;
 use Bakgul\ResourceCreator\Services\RequestServices\JsRequestServices\VueJsRequestService;
 use Bakgul\ResourceCreator\Services\ResourceServices\JsResourceService;
+use Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices\JsResourceSubServices\RootVueJsResourceService;
 
 class VueJsResourceService extends JsResourceService
 {
     public function create(array $request): void
+    {
+        $request['attr']['variation'] == 'root'
+            ? $this->createRoot($request)
+            : $this->createFiles($request);
+    }
+
+    private function createRoot($request)
+    {
+        (new RootVueJsResourceService)->create(
+            (new VueJsRequestService('root'))->handle($request)
+        );
+    }
+
+    private function createFiles($request)
     {
         foreach (['store', 'route'] as $role) {
             if ($this->isNotRequired($role, $request)) continue;

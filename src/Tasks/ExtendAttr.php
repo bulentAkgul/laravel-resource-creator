@@ -2,6 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Tasks;
 
+use Bakgul\Kernel\Helpers\Arry;
 use Bakgul\ResourceCreator\Functions\IsSharable;
 use Bakgul\ResourceCreator\Functions\SetPrefix;
 use Bakgul\ResourceCreator\Functions\UpdateParent;
@@ -13,7 +14,7 @@ class ExtendAttr
     {
         return [
             ...$attr,
-            'job' => 'resource',
+            'job' => Arry::get($attr, 'job') ?? 'resource',
             'sharing' => IsSharable::_($attr['variation']),
             'parent' => UpdateParent::_($attr),
             'path' => UpdatePathSchema::_($attr, 'path'),
