@@ -6,7 +6,8 @@ return [
         'convention' => 'kebab',
         'extension' => 'blade.php',
         'options' => [
-            'oop' => true
+            'oop' => true,
+            'livewire' => true,
         ],
     ],
     'css' => [
@@ -95,8 +96,8 @@ return [
         'options' => [
             'store' => 'vuex',
             'code_splitting' => false,
-            'compositionAPI' => false,
-            'ts' => true,
+            'compositionAPI' => true,
+            'ts' => false,
         ],
     ],
     'pinia' => [
