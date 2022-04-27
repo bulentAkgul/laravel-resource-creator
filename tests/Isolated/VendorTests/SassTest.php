@@ -2,7 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Tests\Isolated\VendorTests;
 
-use Bakgul\FileContent\Tasks\CompleteFolders;
+use Bakgul\Kernel\Tasks\CompleteFolders;
 use Bakgul\Kernel\Tasks\ConvertCase;
 use Bakgul\Kernel\Tests\Tasks\SetupTest;
 use Bakgul\Kernel\Tests\TestCase;
