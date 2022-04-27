@@ -2,7 +2,6 @@
 
 namespace Bakgul\ResourceCreator\Services\RequestServices\JsRequestServices;
 
-use Bakgul\ResourceCreator\Domains\VueComposable;
 use Bakgul\ResourceCreator\Domains\VueRoute;
 use Bakgul\ResourceCreator\Domains\VueStore;
 use Bakgul\ResourceCreator\Functions\ConvertValue;
@@ -29,7 +28,6 @@ class VueJsRequestService extends JsRequestService
         $this->service = match ($this->role) {
             'route' => new VueRoute($request),
             'store' => new VueStore,
-            'mixin' => new VueComposable,
             default => null
         };
     }
