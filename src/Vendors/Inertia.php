@@ -32,7 +32,10 @@ class Inertia
     {
         return implode(PHP_EOL, [
             $request['map']['imports'],
-            $this->importLayout($request['attr'], true)
+            $this->importLayout(
+                $request['attr'],
+                $this->isComposable($request['attr']['app_type'])
+            )
         ]);
     }
 
@@ -50,7 +53,7 @@ class Inertia
 
     private function setLayout(array $attr): string
     {
-        return Settings::resources("{$attr['app_type']}.options.code_splitting")
+        return $this->isComposable($attr['app_type'])
             ? implode(PHP_EOL, [
                 "export default { ",
                 "  Layout: import('{$this->importLayout($attr, true)}')",
@@ -92,7 +95,7 @@ class Inertia
         if (file_exists(Path::glue([
             $request['attr']['path'], $request['attr']['file']
         ]))) return;
-        
+
         $request['map']['name_pascal'] = 'Layout';
         $request['map']['imports'] = '';
         $request['map']['computeds'] = '';
@@ -104,5 +107,10 @@ class Inertia
         CreateFile::_($request);
 
         (new Vue)->removeOptionsAPI($request['attr']);
+    }
+
+    private function isComposable(string $type): bool
+    {
+        return Settings::resources("{$type}.options.code_splitting") ?? false;
     }
 }
