@@ -3,7 +3,7 @@
 namespace Bakgul\ResourceCreator\Services;
 
 use Bakgul\ResourceCreator\ResourceCreator;
-use Bakgul\ResourceCreator\Tasks\Register;
+use Bakgul\FileContent\Tasks\Register;
 
 class RegistrationService extends ResourceCreator
 {
