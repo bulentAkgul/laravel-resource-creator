@@ -2,11 +2,12 @@
 
 namespace Bakgul\ResourceCreator\Tasks;
 
+use Bakgul\Kernel\Functions\CreateFileRequest;
+use Bakgul\Kernel\Tasks\SimulateArtisanCall;
 use Bakgul\Kernel\Helpers\Isolation;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Helpers\Text;
-use Illuminate\Support\Facades\Artisan;
 
 class CreateBackendFiles
 {
@@ -14,7 +15,12 @@ class CreateBackendFiles
     {
         if (self::isNotCreatable($request, $queue)) return;
 
-        Artisan::call(self::createCommand($request));
+        (new SimulateArtisanCall)(CreateFileRequest::_([
+            'name' => self::setName($request),
+            'type' => self::setType($request),
+            'package' => $request['package'],
+            'app' => $request['app'],
+        ]));
     }
 
     public static function isNotCreatable(array $request, array $queue): bool
@@ -54,17 +60,6 @@ class CreateBackendFiles
     private static function creatables(array $queue, string $variation): array
     {
         return array_filter($queue, fn ($x) => $x['type'] == 'view' && $x['variation'] == $variation);
-    }
-
-    private static function createCommand(array $request): string
-    {
-        return implode(' ', array_filter([
-            'create:file',
-            self::setName($request),
-            self::setType($request),
-            $request['package'],
-            $request['app'],
-        ]));
     }
 
     private static function setName(array $request): string
