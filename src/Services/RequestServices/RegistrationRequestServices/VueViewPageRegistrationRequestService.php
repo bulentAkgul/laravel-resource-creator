@@ -39,7 +39,7 @@ class VueViewPageRegistrationRequestService extends RequestService
             ConvertCase::pascal($request['map']['name']),
             'from',
             ''
-        ]) . Text::inject($this->setRelativePath($request['attr']), '"');
+        ]) . Text::wrap($this->setRelativePath($request['attr']), 'dq');
     }
 
     private function setRelativePath(array $attr): string

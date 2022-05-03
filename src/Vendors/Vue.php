@@ -32,7 +32,7 @@ class Vue
     public function view(array $attr): string
     {
         return $attr['variation'] == 'page' && Settings::apps("{$attr['app_key']}.router") == 'vue-router'
-            ? Text::inject("  <router-view />", PHP_EOL)
+            ? Text::wrap("  <router-view />", PHP_EOL)
             : '';
     }
 

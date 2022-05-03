@@ -74,9 +74,9 @@ class Inertia
 
     private function relativePathToLayout(array $attr): string
     {
-        return Text::inject(
+        return Text::wrap(
             SetRelativePath::_($attr['path'], $this->layoutPath($attr)) . 'Layout.vue',
-            '"'
+            'dq'
         );
     }
 

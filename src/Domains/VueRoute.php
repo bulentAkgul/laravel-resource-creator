@@ -88,12 +88,12 @@ class VueRoute
     {
         return str_replace(
             [
-                Text::inject(Settings::folders('js')), 
-                Text::inject($request['map']['role'])
+                Text::wrap(Settings::folders('js')), 
+                Text::wrap($request['map']['role'])
             ],
             [
-                Text::inject(Settings::folders('view')),
-                Text::inject($this->viewFolder())
+                Text::wrap(Settings::folders('view')),
+                Text::wrap($this->viewFolder())
             ],
             $request['attr']['path']
         );
