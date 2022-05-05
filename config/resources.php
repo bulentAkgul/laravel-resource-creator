@@ -1,6 +1,26 @@
 <?php
 
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Resources
+    |--------------------------------------------------------------------------
+    |
+    | This is the List of files and frameworks to create resources. Some items
+    | in the array like React, Next, Svelte that have not been implemeted yet.
+    | Any item whose category is the view, can be an app type, which is set
+    | into "apps" array. The options of items can be changed, but other than
+    | this list isn't very customizable. Some settings worth to mention:
+    | 
+    | oop: if it's true, vanilla JS file will be classes.
+    | js.extension: make it "ts" if you want to work with TypeScript
+    | sass.extension: it can be 'scss' or 'sass'
+    | vue.options.store: it can be 'pinia' or 'vuex',
+    | vue.compositionAPI: if it's true script setup will be used.
+    | code_splitting: when it's true, the components will be loaded lazyly.
+    | 
+    |
+    */
     'blade' => [
         'category' => 'view',
         'convention' => 'kebab',
@@ -8,6 +28,7 @@ return [
         'options' => [
             'oop' => true,
             'livewire' => true,
+            'router' => 'laravel'
         ],
     ],
     'css' => [
@@ -17,10 +38,9 @@ return [
         'options' => [],
     ],
     'electron' => [
-        'category' => 'js',
+        'category' => 'view',
         'convention' => 'Pascal',
         'extension' => 'js',
-        'framework' => 'vue',
         'options' => [],
     ],
     'flutter' => [
@@ -41,6 +61,7 @@ return [
         'convention' => 'pascal',
         'extension' => 'js',
         'options' => [
+            'oop' => true,
             'extensions' => ['js', 'ts']
         ],
     ],
@@ -54,20 +75,20 @@ return [
         'category' => 'view',
         'convention' => 'pascal',
         'extension' => 'jsx',
-        'options' => [],
         'framework' => 'react',
+        'options' => [],
     ],
     'nuxt' => [
         'category' => 'view',
         'convention' => 'pascal',
         'extension' => 'vue',
-        'options' => [],
         'framework' => 'vue',
+        'options' => [],
     ],
     'react' => [
         'category' => 'view',
         'convention' => 'pascal',
-        'extension' => 'jsx',
+        'extension' => 'js',
         'options' => [],
     ],
     'sass' => [
@@ -86,17 +107,18 @@ return [
         'category' => 'view',
         'convention' => 'pascal',
         'extension' => 'svelte',
-        'options' => [],
         'framework' => 'svelte',
+        'options' => [],
     ],
     'vue' => [
         'category' => 'view',
         'convention' => 'pascal',
         'extension' => 'vue',
         'options' => [
-            'store' => 'vuex',
+            'store' => 'pinia',
             'code_splitting' => false,
             'compositionAPI' => true,
+            'router' => 'vue-router',
             'ts' => false,
         ],
     ],
@@ -104,14 +126,14 @@ return [
         'framework' => 'vue',
         'extension' => 'js',
         'name_schema' => 'use{{ schema }}Store',
-        'maps' => ['computeds' => ['State'], 'methods' => ['Actions']]
-    ],
-    'inertia' => [
-        'renderables' => ['index', 'show', 'edit']
+        'maps' => ['computeds' => ['State'], 'methods' => ['Actions']],
     ],
     'vuex' => [
         'framework' => 'vue',
         'extension' => 'js',
-        'maps' => ['computeds' => ['State', 'Getters'], 'methods' => ['Actions']]
-    ]
+        'maps' => ['computeds' => ['State', 'Getters'], 'methods' => ['Actions']],
+    ],
+    'inertia' => [
+        'renderables' => ['index', 'show', 'edit'],
+    ],
 ];
