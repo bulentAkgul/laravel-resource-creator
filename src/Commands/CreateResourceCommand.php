@@ -7,6 +7,7 @@ use Bakgul\Kernel\Concerns\HasRequest;
 use Bakgul\Kernel\Concerns\Sharable;
 use Bakgul\Evaluator\Concerns\ShouldBeEvaluated;
 use Bakgul\Evaluator\Services\ResourceCommandEvaluationService;
+use Bakgul\FileHistory\Concerns\HasHistory;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Tasks\MakeFileList;
 use Bakgul\ResourceCreator\Services\ResourceService;
@@ -16,7 +17,7 @@ use Illuminate\Console\Command;
 
 class CreateResourceCommand extends Command
 {
-    use HasPreparation, HasRequest, Sharable, ShouldBeEvaluated;
+    use HasHistory, HasPreparation, HasRequest, Sharable, ShouldBeEvaluated;
 
     protected $signature = '
         create:resource
@@ -51,6 +52,8 @@ class CreateResourceCommand extends Command
         }
 
         $queue = ModifyFileList::_(MakeFileList::_($this->request));
+
+        $this->logFile();
 
         $this->createFiles($queue);
 
