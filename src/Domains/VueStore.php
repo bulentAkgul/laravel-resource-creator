@@ -90,7 +90,7 @@ class VueStore
 
     private function isNotStorable(string $variation): bool
     {
-        return in_array($variation, Settings::resourceOptions('levels.low')) || !$this->store;
+        return in_array($variation, Settings::get('levels.low')) || !$this->store;
     }
 
     public function schema(array $attr): string

@@ -23,8 +23,8 @@ class VueRoute
 
     private function isNotRoutable(array $attr): bool
     {
-        return !in_array($attr['variation'], Settings::resourceOptions('levels.high'))
-            || in_array(Settings::apps($attr['router']), Settings::prohibitives('route'));
+        return !in_array($attr['variation'], Settings::get('levels.high'))
+            || in_array($attr['router'], Settings::prohibitives('route'));
     }
 
     public function stub()
@@ -47,11 +47,11 @@ class VueRoute
         if ($this->isNotRoutable($attr)) return '';
 
         $task = Arry::has('wrapper', $attr) ? $attr['name'] : $attr['task'];
-        $schema = $task ? Settings::router('schemas.' . $task) : '';
+        $schema = $task ? Settings::get("routes.{$task}") : '';
 
         if ($attr['variation'] == 'section') return $schema;
 
-        return Settings::resourceOptions('tasks_as_sections')
+        return Settings::main('tasks_as_sections')
             ? $attr['name']
             : implode('/', array_filter([$attr['wrapper'], $schema]));
     }

@@ -2,6 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Tests\Isolated\VendorTests;
 
+use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Tasks\ConvertCase;
 use Bakgul\Kernel\Tests\TestCase;
 use Bakgul\ResourceCreator\Vendors\Vanilla;
@@ -25,22 +26,22 @@ class VanillaTest extends TestCase
             'pipeline' => ['options' => ['ts' => true]]
         ]));
 
-        config()->set('packagify.resources.vue.options.ts', false);
+        Settings::set('resources.vue.options.ts', false);
         $this->assertEquals('ts', $this->c->extension([
             'pipeline' => ['options' => ['ts' => true]]
         ]));
 
-        config()->set('packagify.resources.js.extension', 'ts');
+        Settings::set('resources.js.extension', 'ts');
         $this->assertEquals('ts', $this->c->extension([
             'type' => 'js'
         ]));
 
-        config()->set('packagify.resources.js.extension', 'js');
+        Settings::set('resources.js.extension', 'js');
         $this->assertEquals('js', $this->c->extension([
             'type' => 'js'
         ]));
 
-        config()->set('packagify.resources.js.options.ts', true);
+        Settings::set('resources.js.options.ts', true);
         $this->assertEquals('ts', $this->c->extension([
             'type' => 'js'
         ]));

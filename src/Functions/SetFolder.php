@@ -12,7 +12,7 @@ class SetFolder
     {
         if (Arry::has('folder', $attr)) return ConvertCase::{$attr['convention']}($attr['folder']);
 
-        return in_array($attr['variation'], Settings::resourceOptions('section_parents'))
+        return in_array($attr['variation'], Settings::get('parents.section'))
             ? $attr['name']
             : ($attr['variation'] == 'section' ? ($attr['parent']['name'] ?: $attr['name']) : '');
     }

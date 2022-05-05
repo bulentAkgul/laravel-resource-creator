@@ -8,7 +8,7 @@ class IsSharable
 {
     public static function _($variation): bool
     {
-        return in_array($variation, Settings::resourceOptions('levels.low'))
-            && Settings::resourceOptions('share_low_levels_between_apps');
+        return in_array($variation, Settings::get('levels.low'))
+            && Settings::main('share_low_levels_between_apps');
     }
 }

@@ -22,7 +22,7 @@ class ModifyFileList
 
     private static function isNotModifyable(): bool
     {
-        return Settings::resourceOptions('tasks_as_sections');
+        return Settings::main('tasks_as_sections');
     }
 
     private static function convert($files)

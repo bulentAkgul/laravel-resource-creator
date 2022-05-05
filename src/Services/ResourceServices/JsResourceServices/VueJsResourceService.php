@@ -53,13 +53,13 @@ class VueJsResourceService extends JsResourceService
     private function isNotStorable($attr)
     {
         return Prevented::store($attr['pipeline']['type'])
-            || in_array($attr['variation'], Settings::resourceOptions('levels.low'));
+            || in_array($attr['variation'], Settings::get('levels.low'));
     }
 
     private function isNotRoutable($attr)
     {
         return Prevented::route($attr['router'])
-            || !in_array($attr['variation'], Settings::resourceOptions('levels.high'));
+            || !in_array($attr['variation'], Settings::get('levels.high'));
     }
 
     private function registrationService($attr, $role): ?object

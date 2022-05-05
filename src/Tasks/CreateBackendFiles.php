@@ -42,7 +42,7 @@ class CreateBackendFiles
 
     private static function hasNoController($queue)
     {
-        return !Settings::resourceOptions('each_page_has_controller')
+        return !Settings::main('each_page_has_controller')
             || empty(self::creatables($queue, 'page'));
     }
 
@@ -92,7 +92,7 @@ class CreateBackendFiles
 
     private static function setPrefix(string $type): string
     {
-        return Settings::resourceOptions('use_prefix') ? Settings::prefixes(Isolation::variation($type)) : '';
+        return Settings::main('use_prefix') ? Settings::prefixes(Isolation::variation($type)) : '';
     }
 
     private static function setType(array $request)
