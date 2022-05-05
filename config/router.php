@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'routables' => ['index', 'store', 'create', 'show', 'edit', 'update', 'destroy'],
     'schemas' => [
         'index' => '',
         'store' => 'store',
