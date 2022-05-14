@@ -6,8 +6,7 @@ return [
     | Resources
     |--------------------------------------------------------------------------
     |
-    | This is the List of files and frameworks to create resources. Some items
-    | in the array like React, Next, Svelte that have not been implemeted yet.
+    | This is the List of files and frameworks to create resources.
     | Any item whose category is the view, can be an app type, which is set
     | into "apps" array. The options of items can be changed, but other than
     | this list isn't very customizable. Some settings worth to mention:
@@ -37,25 +36,6 @@ return [
         'extension' => 'css',
         'options' => [],
     ],
-    'electron' => [
-        'category' => 'view',
-        'convention' => 'Pascal',
-        'extension' => 'js',
-        'options' => [],
-    ],
-    'flutter' => [
-        'category' => 'view',
-        'convention' => 'Pascal',
-        'extension' => 'dart',
-        'options' => [],
-    ],
-    'ionic' => [
-        'category' => 'view',
-        'convention' => 'pascal',
-        'extension' => 'vue',
-        'options' => [],
-        'framework' => 'vue',
-    ],
     'js' => [
         'category' => 'js',
         'convention' => 'pascal',
@@ -65,19 +45,6 @@ return [
             'extensions' => ['js', 'ts']
         ],
     ],
-    'less' => [
-        'category' => 'css',
-        'convention' => 'kebab',
-        'extension' => 'less',
-        'options' => [],
-    ],
-    'next' => [
-        'category' => 'view',
-        'convention' => 'pascal',
-        'extension' => 'jsx',
-        'framework' => 'react',
-        'options' => [],
-    ],
     'nuxt' => [
         'category' => 'view',
         'convention' => 'pascal',
@@ -85,29 +52,10 @@ return [
         'framework' => 'vue',
         'options' => [],
     ],
-    'react' => [
-        'category' => 'view',
-        'convention' => 'pascal',
-        'extension' => 'js',
-        'options' => [],
-    ],
     'sass' => [
         'category' => 'css',
         'convention' => 'kebab',
         'extension' => 'scss',
-        'options' => [],
-    ],
-    'svelte' => [
-        'category' => 'view',
-        'convention' => 'pascal',
-        'extension' => 'svelte',
-        'options' => [],
-    ],
-    'svelteKit' => [
-        'category' => 'view',
-        'convention' => 'pascal',
-        'extension' => 'svelte',
-        'framework' => 'svelte',
         'options' => [],
     ],
     'vue' => [

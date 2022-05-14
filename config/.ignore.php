@@ -1,3 +1,3 @@
 <?php
 
-return ['.ignore', 'folders', 'parents'];
+return ['.ignore', 'folders', 'parents', 'resources_next'];
