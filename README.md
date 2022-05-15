@@ -23,20 +23,7 @@ sail artisan packagify:publish-stub
 create:resource {name} {type} {package?} {app?} {--p|parent=} {--c|class} {--t|taskless} {--f|force}
 ```
 
-### Expected Inputs
-+ **Package**: It won't be used when you work on a Standalone Laravel or Standalone Package. If you don't specify a valid package name, the file will be generated in the resources folder.
-
-+ **App**: To create files for a specific app, you need to specified the app name. The settings are in **apps** array on **packagify.php** file.
-
-+ **Parent**: When you create a section, you need to tell what is the page name that holds the creating section.
-
-+ **Class**: When you create a Blade component, you need to add "**-c**" or "**--class**" to the command to create a class of the component.
-
-+ **Taskless**: The file types that have tasks like service, or test, will be generated as a seperate file for each task unless tasks are specified. But sometime, you may want to create a single file without any task. To do that, you need to append "**-t**" or "**--taskless**" to your command. This will cancel the default behaviour of the task explosion.
-
-+ **Force**: Normally, a file will not be regenerated if it exists. If this options is passed, a new file will be created anyway.
-
-### Arguments' Schemas and Details
+### Arguments and Options
 + **Name**: subs/name:task
 
   + **subs**: You can specify subfolders like **sub1/sub2/sub3** when you need deeper file structure.
@@ -49,7 +36,7 @@ create:resource {name} {type} {package?} {app?} {--p|parent=} {--c|class} {--t|t
 
 + **Type**: name:variation:role
 
-  + **name**: It's required and should be one of *view, css, js.*
+  + **name**: It should be one of 'view, css, js.' It will be determined which file type will be generated based on the app type. For example, if you create files for admin app, and the admin app's type is 'vue', then the view files will be Vue, js files will be store and route files. The settings of those types are in the 'resources' array on 'packagify.php'.
 
   + **variation**: It's required and should be one of the variatons of the specified file type.
 
@@ -57,9 +44,19 @@ create:resource {name} {type} {package?} {app?} {--p|parent=} {--c|class} {--t|t
     + *exist*: It should be one of the items in the roles array.
     + *missing*: It will be default one which is no-role.
 
++ **Package**: It won't be used when you work on a Standalone Laravel or Standalone Package. If you don't specify a valid package name, the file will be generated in the resources folder.
+
++ **App**: To create files for a specific app, you need to specified the app name. The settings are in **apps** array on **packagify.php** file.
+
++ **Parent**: When you create a section, you need to tell what is the page name that holds the creating section.
+
++ **Class**: When you create a Blade component, you need to add "**-c**" or "**--class**" to the command to create a class of the component.
+
++ **Taskless**: The file types that have tasks like service, or test, will be generated as a seperate file for each task unless tasks are specified. But sometime, you may want to create a single file without any task. To do that, you need to append "**-t**" or "**--taskless**" to your command. This will cancel the default behaviour of the task explosion.
+
++ **Force**: Normally, a file will not be regenerated if it exists. If this options is passed, a new file will be created anyway.
 
 ## Packagified Laravel
-
 The main package that includes this one can be found here: **[Packagified Laravel](https://github.com/bulentAkgul/packagified-laravel)**
 
 ## The Packages That Will Be Installed By This Package
