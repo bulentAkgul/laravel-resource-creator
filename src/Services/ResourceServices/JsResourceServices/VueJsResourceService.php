@@ -58,7 +58,7 @@ class VueJsResourceService extends JsResourceService
 
     private function isNotRoutable($attr)
     {
-        return Prevented::route($attr['router'])
+        return Prevented::route($attr['router'], $attr['type'])
             || !in_array($attr['variation'], Settings::get('levels.high'));
     }
 
