@@ -2,6 +2,10 @@
 
 This package aims to create the view, style, and javascript files. It can create all boilerplates and connect files to each other to reduce repetitive tasks. Blade, Vuejs (view, vue-router, vuex, pinia), and Sass are covered in this first release.
 
+#### DISCLAIMER
+
+It should be production-ready but hasn't been tested enough. You should use it carefully since this package will manipulate your files and folders. Always use a version-control, and make sure you have [**File History**](https://github.com/bulentAkgul/file-history) to be able to roll back the changes.
+
 ## Installation
 
 If you installed [**Packagified Laravel**](https://github.com/bulentAkgul/packagified-laravel), you should have this package already. So skip installation.
@@ -14,16 +18,19 @@ Next, you need to publish the settings by executing the following command. By do
 ```
 sail artisan packagify:publish-config
 ```
+
 After publishing stubs, you will be able to update the stub files as you need. It's safe to delete the unedited files.
 ```
 sail artisan packagify:publish-stub
 ```
+
 ### Command Signature
+
 ```
 create:resource {name} {type} {package?} {app?} {--p|parent=} {--c|class} {--t|taskless} {--f|force}
 ```
 
-### Arguments and Options
+### Arguments
 
 -   **name**: subs/name:task
 
@@ -35,7 +42,7 @@ create:resource {name} {type} {package?} {app?} {--p|parent=} {--c|class} {--t|t
         -   *exist*: You may set one or more tasks with a dot-separated fashion like "**users:index**" or "**users:index.store.update**." The task should be in the file type and its pairs' and the global task lists (see the tasks array on *config/packagify.php*). Otherwise, it will be ignored.
         -   *missing*: If the underlying file type has tasks, a separate file will be generated for each of them. Otherwise, a single file will be generated.
 
--   **Type**: name:variation:role
+-   **type**: name:variation:role
     -   **name**: It should be one of 'view, css, js.' It will be determined which file type will be generated based on the app type. For example, if you create files for the admin app, and the admin app's type is 'vue', then the view files will be Vue, and js files will be 'store' and 'route' files. The settings of those types are in the 'resources' array on 'packagify.php'.
    
     -   **variation**: It's required and should be one of the variations of the specified file type.
@@ -44,17 +51,19 @@ create:resource {name} {type} {package?} {app?} {--p|parent=} {--c|class} {--t|t
         -   *exist*: It should be one of the items in the roles array.
         -   *missing*: It will be the default one which is no-role.
 
--   **Package**: It won't be used when working on a Standalone Laravel or Standalone Package. If you don't specify a valid package name, the file will be generated in the resources folder.
+-   **package**: It won't be used when working on a Standalone Laravel or Standalone Package. If you don't specify a valid package name, the file will be generated in the resources folder.
 
--   **App**: To create files for a specific app, you must specify the app name. The settings are in the **apps** array on **the packagify.php** file.
+-   **app**: To create files for a specific app, you must specify the app name. The settings are in the **apps** array on **the packagify.php** file.
 
--   **Parent**: When you create a section, you need to tell what is the page name that holds the creating section.
+### Options
 
--   **Class**: When you create a Blade component, you need to add "**-c**" or "**--class**" to the command to create a class of the component.
+-   **parent**: When you create a section, you need to tell what is the page name that holds the creating section.
 
--   **Taskless**: The sections will be generated as a separate file for each task unless the comment has tasks. But sometimes, you may want to create a single file without any task. In such cases, you need to append '-t' or '--taskless' to your command. This will cancel the default behavior of the task explosion.
+-   **class**: When you create a Blade component, you need to add "**-c**" or "**--class**" to the command to create a class of the component.
 
--   **Force**: Normally, a file will not be regenerated if it exists. If this option is passed, a new file will be created anyway.
+-   **taskless**: The sections will be generated as a separate file for each task unless the comment has tasks. But sometimes, you may want to create a single file without any task. In such cases, you need to append '-t' or '--taskless' to your command. This will cancel the default behavior of the task explosion.
+
+-   **force**: Normally, a file will not be regenerated if it exists. If this option is passed, a new file will be created anyway.
 
 ## Packagified Laravel
 
