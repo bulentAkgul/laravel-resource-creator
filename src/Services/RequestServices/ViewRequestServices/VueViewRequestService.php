@@ -44,6 +44,7 @@ class VueViewRequestService extends ViewRequestService
             ...(new VueStore)->code($request),
             ...$this->vue->options($request['attr']),
             'view' => $this->vue->view($request['attr']),
+            'script' => '',
         ]);
     }
 }
