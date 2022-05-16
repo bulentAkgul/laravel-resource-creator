@@ -2,7 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices;
 
-use Bakgul\Kernel\Functions\CreateFile;
+use Bakgul\FileContent\Functions\CreateFile;
 use Bakgul\Kernel\Helpers\Prevented;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices\VueRoutePageRegistrationService;

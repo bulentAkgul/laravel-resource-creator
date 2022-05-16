@@ -3,7 +3,7 @@
 namespace Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceServices;
 
 use Bakgul\Kernel\Functions\CallClass;
-use Bakgul\Kernel\Functions\CreateFile;
+use Bakgul\FileContent\Functions\CreateFile;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices\VueViewRequestService;
 use Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceService;
 use Bakgul\ResourceCreator\Vendors\Vue;

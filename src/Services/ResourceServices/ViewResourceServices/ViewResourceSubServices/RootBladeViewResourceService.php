@@ -2,7 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceServices\ViewResourceSubServices;
 
-use Bakgul\Kernel\Functions\CreateFile;
+use Bakgul\FileContent\Functions\CreateFile;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices\ViewRequestSubServices\LayoutVueRequestService;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices\ViewRequestSubServices\RootBladeRequestService;
 use Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceServices\BladeViewResourceService;

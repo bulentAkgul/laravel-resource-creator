@@ -2,7 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Vendors;
 
-use Bakgul\Kernel\Functions\CreateFile;
+use Bakgul\FileContent\Functions\CreateFile;
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Helpers\Text;

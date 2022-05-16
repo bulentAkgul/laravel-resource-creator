@@ -2,7 +2,7 @@
 
 namespace Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices\JsResourceSubServices;
 
-use Bakgul\Kernel\Functions\CreateFile;
+use Bakgul\FileContent\Functions\CreateFile;
 use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices\ViewRequestSubServices\RootVueJsRequestService;
 use Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices\VueJsResourceService;
 
