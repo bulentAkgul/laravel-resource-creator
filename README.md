@@ -14,7 +14,7 @@ composer require bakgul/laravel-resource-creator --dev
 ```
 **NOTE**: This package will not install [**Laravel File Creator**](https://github.com/bulentAkgul/laravel-file-creator), but you will need it to create the Balde component and Livewire classes.
 
-Next, you need to publish the settings by executing the following command. By doing so, you will have a new file named *config/packagify.php* in the config folder. The resource types are in the "**resources**" array. The main settings of files in the **files** array under the keys of "*view, css, js*." Quite deep explanations are provided in the comment blocks of those arrays.
+Next, you need to publish the settings by executing the following command. By doing so, you will have a new file named *packagify.php* on the config folder. The resource types are in the "**resources**" array. The main settings of files in the **files** array under the keys of "*view, css, js*." Quite deep explanations are provided in the comment blocks of those arrays.
 ```
 sail artisan packagify:publish-config
 ```
