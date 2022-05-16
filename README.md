@@ -1,6 +1,6 @@
 # Laravel Resource Creator
 
-This package aims to create the view, style, and javascript. It can create all boilerplates to reduce repetitive tasks.
+This package aims to create the view, style, and javascript files. It can create all boilerplates and connect files to each other to reduce repetitive tasks. Blade, Vuejs (view, vue-router, vuex, pinia), and Sass are covered in this first release.
 
 ## Installation
 
@@ -10,7 +10,7 @@ composer require bakgul/laravel-resource-creator --dev
 ```
 **NOTE**: This package will not install [**Laravel File Creator**](https://github.com/bulentAkgul/laravel-file-creator), but you will need it to create the Balde component and Livewire classes.
 
-Next, you need to publish the settings by executing the following command. By doing so, you will have a new file named **packagify.php** in the config folder. The resource types are in the "**resources**" array. The main settings of files in the **files** array under the keys of "*view, css, js*." Quite deep explanations are provided in the comment blocks of those arrays.
+Next, you need to publish the settings by executing the following command. By doing so, you will have a new file named *config/packagify.php* in the config folder. The resource types are in the "**resources**" array. The main settings of files in the **files** array under the keys of "*view, css, js*." Quite deep explanations are provided in the comment blocks of those arrays.
 ```
 sail artisan packagify:publish-config
 ```
@@ -32,7 +32,7 @@ create:resource {name} {type} {package?} {app?} {--p|parent=} {--c|class} {--t|t
     -   **name**: The file name without any suffix.
  
     -   **task**: This is optional.
-        -   *exist*: You may set one or more tasks with a dot-separated fashion like "**users:index**" or "**users:index.store.update**." The task should be in the file type and its pairs' and the global task lists (see the tasks array on **config/packagify.php**). Otherwise, it will be ignored.
+        -   *exist*: You may set one or more tasks with a dot-separated fashion like "**users:index**" or "**users:index.store.update**." The task should be in the file type and its pairs' and the global task lists (see the tasks array on *config/packagify.php*). Otherwise, it will be ignored.
         -   *missing*: If the underlying file type has tasks, a separate file will be generated for each of them. Otherwise, a single file will be generated.
 
 -   **Type**: name:variation:role
