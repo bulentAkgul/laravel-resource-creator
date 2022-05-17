@@ -3,7 +3,6 @@
 namespace Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceServices\ViewResourceSubServices;
 
 use Bakgul\FileContent\Functions\CreateFile;
-use Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices\VueViewSectionRegistrationService;
 use Bakgul\ResourceCreator\Services\ResourceServices\ViewResourceServices\VueViewResourceService;
 use Bakgul\ResourceCreator\Vendors\Inertia;
 
