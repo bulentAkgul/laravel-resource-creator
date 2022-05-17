@@ -1,6 +1,6 @@
 <?php
 
-namespace Bakgul\ResourceCreator\Services\RequestServices\ViewRequestServices\ViewRequestSubServices;
+namespace Bakgul\ResourceCreator\Services\RequestServices\JsRequestServices\JsRequestSubServices;
 
 use Bakgul\Kernel\Helpers\Path;
 use Bakgul\Kernel\Helpers\Settings;
@@ -10,9 +10,10 @@ use Bakgul\ResourceCreator\Services\RequestServices\ViewRequestService;
 
 class RootVueJsRequestService extends ViewRequestService
 {
-    public function handle(array $request): array
+    public static function main(array $request): array
     {
         $request['attr']['path'] = Text::dropTail($request['attr']['path'], length: 3);
+
         $request['attr']['file'] = implode('.', [
             $request['attr']['app_folder'],
             $request['attr']['pipeline']['options']['ts'] ? 'ts' : Settings::resources('js.extension') ?? 'js'
@@ -65,7 +66,45 @@ class RootVueJsRequestService extends ViewRequestService
 
         return implode(PHP_EOL, array_filter([
             $store ? "\napp.use({$store})" : '',
-            $route ? "\napp.use({$store})" : '',
+            $route ? "\napp.use({$route})" : '',
         ]));
+    }
+
+    public static function vuex($request): array
+    {
+        $request['attr']['path'] = self::dropTail($request['attr']['path']);
+        $request['attr']['file'] = 'stores.js';
+        $request['attr']['stub'] = 'js.vue.stores.stub';
+
+        return $request;
+    }
+
+    public static function pinia($request): array
+    {
+        $request['attr']['job'] = 'resource';
+        $request['attr']['stub'] = 'js.vue.pinia.stub';
+        $request['attr']['path'] = self::dropTail($request['attr']['path']);
+        $request['attr']['file'] = "use{$request['map']['name_pascal']}." . Settings::resources('pinia.extension');
+
+        $request['map']['id'] = lcfirst($request['map']['name_pascal']);
+
+        return $request;
+    }
+
+    public static function router($request): array
+    {
+        $request['attr']['path'] = self::dropTail($request['attr']['path']);
+        $request['attr']['file'] = 'router.js';
+        $request['attr']['stub'] = 'js.vue.router.stub';
+
+        $request['map']['container'] = Settings::folders('view');
+        $request['map']['route_group'] = Settings::apps("{$request['attr']['app_key']}.route_group");
+
+        return $request;
+    }
+
+    private static function dropTail(string $path)
+    {
+        return Text::dropTail($path, length: 2);
     }
 }
