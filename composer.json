@@ -1,6 +1,6 @@
 {
   "name": "bakgul/laravel-resource-creator",
-  "description": "Create view, style and js files for different frameworks in packages or Laravel repository.",
+  "description": "This package aims to create the view, style, and javascript files. It can create all boilerplates and connect files to each other to reduce repetitive tasks. Blade, Vuejs (view, vue-router, vuex, pinia), and Sass are covered in this first release.",
   "authors": [
     {
       "name": "Bulent Akgul",
