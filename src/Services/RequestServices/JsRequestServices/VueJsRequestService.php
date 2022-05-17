@@ -61,7 +61,7 @@ class VueJsRequestService extends JsRequestService
         $request['map']['route'] = $this->setRoute($request);
         $request['map']['imports'] = $this->setImports($request);
         $request['map']['component'] = $this->setComponent($request);
-        
+
         return $request;
     }
 
