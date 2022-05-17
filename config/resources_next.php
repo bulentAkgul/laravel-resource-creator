@@ -33,6 +33,13 @@ return [
         'framework' => 'react',
         'options' => [],
     ],
+    'nuxt' => [
+        'category' => 'view',
+        'convention' => 'pascal',
+        'extension' => 'vue',
+        'framework' => 'vue',
+        'options' => [],
+    ],
     'react' => [
         'category' => 'view',
         'convention' => 'pascal',

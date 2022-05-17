@@ -6,13 +6,13 @@ return [
     | Resource Files from Resource Creator
     |--------------------------------------------------------------------------
     |
-    | These are the file group types that can be created by "create:resource"
-    | command. The details of the creating files are in the "resources" array,
-    | they will be chosed based on the app passed in the command. For example,
-    | when you create a view file in admin app, the file type will be "Vue"
-    | because admin app type is Vue. The main logic of the other parts are
-    | already explained in the previous comment block. We have one extra field
-    | here which is "roles." You can pass the value of role as "extra."
+    | This is the list of file-group types created by the "create:resource"
+    | command. The details of the creatable types are in the "resources"
+    | array. They will be chosen based on the app passed in the command.
+    | For example, when creating a view file in the admin app, the file
+    | type will be "Vue" because the admin app type is Vue. The main logic
+    | of the other parts is already explained in the previous comment block.
+    | We have one extra field here, which is "roles."
     |
     */
     'view' => [

@@ -6,18 +6,18 @@ return [
     | Resources
     |--------------------------------------------------------------------------
     |
-    | This is the List of files and frameworks to create resources.
-    | Any item whose category is the view, can be an app type, which is set
-    | into "apps" array. The options of items can be changed, but other than
-    | this list isn't very customizable. Some settings worth to mention:
+    | This is the list of the files and frameworks to create resources. Any
+    | item whose category is the "view" can be an app type. The options of
+    | items can be changed, but other than this list isn't very customizable.
+    |
+    | Some settings worth mentioning:
     | 
-    | oop: if it's true, vanilla JS file will be classes.
-    | js.extension: make it "ts" if you want to work with TypeScript
-    | sass.extension: it can be 'scss' or 'sass'
-    | vue.options.store: it can be 'pinia' or 'vuex',
-    | vue.compositionAPI: if it's true script setup will be used.
-    | code_splitting: when it's true, the components will be loaded lazyly.
-    | 
+    | "oop": if it's true, vanilla JS files will be classes.
+    | "js.extension": make it "ts" if you want to work with TypeScript
+    | "sass.extension": "scss" or "sass"
+    | "vue.options.store": "pinia" or "vuex"
+    | "vue.compositionAPI": if it's true, script setup will be used.
+    | "code_splitting": when it's true, the components will be loaded lazily.
     |
     */
     'blade' => [
@@ -44,13 +44,6 @@ return [
             'oop' => true,
             'extensions' => ['js', 'ts']
         ],
-    ],
-    'nuxt' => [
-        'category' => 'view',
-        'convention' => 'pascal',
-        'extension' => 'vue',
-        'framework' => 'vue',
-        'options' => [],
     ],
     'sass' => [
         'category' => 'css',

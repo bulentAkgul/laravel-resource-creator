@@ -8,7 +8,7 @@ return [
     |
     | The route schemas for different tasks. You edit the list as you need.
     | If you add a new task into the arrays of files and tasks, it can be
-    | a good idea to assign a route schema to it.  
+    | a good idea to attach a routing schema to it. 
     |
     */
     'index' => '',

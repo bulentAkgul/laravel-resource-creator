@@ -6,9 +6,9 @@ return [
     | File Prefixes
     |--------------------------------------------------------------------------
     |
-    | Some frameworks such as Vuejs recommends the use of prefixes.
+    | Some frameworks, such as Vuejs, recommend the use of prefixes.
     | You can control them here. If you want to stop adding prefixes,
-    | you can do that by changing "use_prefix" settings under "main".
+    | you can change the "use_prefix" option under the "main" array.
     |
     */
     'component' => 'base',
