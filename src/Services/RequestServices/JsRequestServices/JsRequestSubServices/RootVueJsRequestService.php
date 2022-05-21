@@ -12,7 +12,7 @@ class RootVueJsRequestService extends ViewRequestService
 {
     public static function main(array $request): array
     {
-        $request['attr']['path'] = Text::dropTail($request['attr']['path'], length: 3);
+        $request['attr']['path'] = Text::dropTail($request['attr']['path'], length: 2);
 
         $request['attr']['file'] = implode('.', [
             $request['attr']['app_folder'],
@@ -55,7 +55,7 @@ class RootVueJsRequestService extends ViewRequestService
     private static function route($app): string
     {
         return Text::append($app['router'] == 'vue-router'
-            ? "import { router } from './" . Settings::folders('js') . "/router';"
+            ? "import { router } from './router';"
             : '', "\n");
     }
 

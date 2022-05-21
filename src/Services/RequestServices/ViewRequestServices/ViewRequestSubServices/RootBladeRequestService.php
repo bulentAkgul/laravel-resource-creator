@@ -12,7 +12,7 @@ class RootBladeRequestService extends ViewRequestService
     {
         $app = $request['attr']['app_type'] == 'blade' ? 'mpa' : 'spa';
 
-        $request['attr']['path'] = Text::dropTail($request['attr']['path'], length: 2);
+        $request['attr']['path'] = Text::dropTail($request['attr']['path']);
         $request['attr']['stub'] = "blade.{$app}.stub";
 
         $request['map']['extend'] = $request['attr']['parent']['name'];
