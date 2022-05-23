@@ -26,8 +26,9 @@ return [
         'extension' => 'blade.php',
         'options' => [
             'oop' => true,
-            'livewire' => true,
-            'router' => 'laravel'
+            'class' => true,
+            'livewire' => false,
+            'router' => 'laravel',
         ],
     ],
     'css' => [
