@@ -12,14 +12,16 @@ return [
     | For example, when creating a view file in the admin app, the file
     | type will be "Vue" because the admin app type is Vue. The main logic
     | of the other parts is already explained in the previous comment block.
-    | We have one extra field here, which is "roles."
+    | As you can see, 'tasks' are empty by default. Their values will be
+    | got from 'main.tasks_have_views' array. You can overwrite tasks by
+    | setting them here. We have one extra field here, which is "roles."
     |
     */
     'view' => [
         'family' => 'resources',
         'name_schema' => '{{ prefix }}{{ name }}{{ task }}{{ wrapper }}',
         'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ folder }}{{ subs }}',
-        'tasks' => ['', 'index', 'store', 'update', 'destroy'],
+        'tasks' => [],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
         'roles' => ['', 'livewire'],
         'name_count' => 'X',
@@ -29,7 +31,7 @@ return [
         'family' => 'resources',
         'name_schema' => '{{ prefix }}{{ name }}{{ task }}{{ wrapper }}',
         'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ role }}{{ variation }}{{ folder }}{{ subs }}',
-        'tasks' => ['', 'index', 'store', 'update', 'destroy'],
+        'tasks' => [],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
         'roles' => ['', 'class', 'store', 'route'],
         'name_count' => 'X',
@@ -39,7 +41,7 @@ return [
         'family' => 'resources',
         'name_schema' => '{{ prefix }}{{ name }}{{ task }}{{ wrapper }}',
         'path_schema' => '{{ apps }}{{ app }}{{ container }}{{ variation }}{{ folder }}{{ subs }}',
-        'tasks' => ['', 'index', 'store', 'update', 'destroy'],
+        'tasks' => [],
         'variations' => ['component', 'composite', 'module', 'section', 'page'],
         'roles' => [''],
         'name_count' => 'X',

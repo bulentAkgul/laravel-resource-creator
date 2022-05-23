@@ -28,6 +28,7 @@ return [
     'css' => 'sass',
     'each_page_has_controller' => true,
     'share_low_levels_between_apps' => true,
-    'tasks_as_sections' => false,
+    'tasks_as_sections' => true,
     'use_prefix' => true,
+    'tasks_have_views' => ['index', 'create', 'show', 'edit']
 ];
