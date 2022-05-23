@@ -1,0 +1,3 @@
+<x-{{ page }}>
+  <div class="{{ name_kebab }}"></div>
+</x-{{ page }}>

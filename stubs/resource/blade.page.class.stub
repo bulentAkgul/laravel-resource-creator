@@ -1,0 +1,5 @@
+<x-{{ app }}-layout>
+  <div class="{{ name_kebab }}">
+    {{ $slot }}
+  </div>
+</x-{{ app }}-layout>
