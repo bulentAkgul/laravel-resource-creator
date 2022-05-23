@@ -11,7 +11,6 @@ use Bakgul\FileHistory\Concerns\HasHistory;
 use Bakgul\Kernel\Helpers\Settings;
 use Bakgul\Kernel\Tasks\MakeFileList;
 use Bakgul\ResourceCreator\Services\ResourceService;
-use Bakgul\ResourceCreator\Tasks\CreateBackendFiles;
 use Bakgul\ResourceCreator\Tasks\ModifyFileList;
 use Illuminate\Console\Command;
 
@@ -95,8 +94,11 @@ class CreateResourceCommand extends Command
             "which is the page that will hold the creating section."
         ],
         'class' => [
-            "When you create a Blade component, you need to add '-c' or '--class'",
-            "to the command to create a component class."
+            "The value of 'blade.options.class' in the resources array will be altered",
+            "when the command has '-c' or '--class'. When that setting is 'true,' the",
+            "Blade files will have a class pair and be used like '<x-comp>  </x-comp>.'",
+            "Otherwise, they will be like parent-child files and used through 'extends,",
+            "section, yield.'"
         ],
         'taskless' => [
             "The sections will be generated as a separate file for each task unless",
@@ -136,8 +138,6 @@ class CreateResourceCommand extends Command
         $this->logFile();
 
         $this->createFiles($queue);
-
-        CreateBackendFiles::_($this->request, $queue);
     }
 
     private function createFiles(array $queue)
