@@ -38,6 +38,7 @@ class BladeViewRequestService extends ViewRequestService
             'name_kebab' => ConvertCase::kebab($request['map']['name']),
             'extend_page' => $this->blade->extend($request['attr']),
             'package' => $this->blade->package($request['map']['package']),
+            'page' => ConvertCase::_($request['attr']['parent']['name'], $request['attr']['convention'])
         ]);
     }
 }
