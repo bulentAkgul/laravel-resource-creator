@@ -17,13 +17,24 @@ class RootBladeRequestService extends ViewRequestService
 
         $request['map']['extend'] = $request['attr']['parent']['name'];
 
-        $request['map']['scripts'] = Arr::get($request, 'attr.pipeline.options.livewire') ? '@livewireScripts' : '';
-        $request['map']['styles'] = Arr::get($request, 'attr.pipeline.options.livewire') ? '@livewireStyles' : '';
-        $request['map']['content'] = match ($request['attr']['app_type']) {
-            'vue' => "\n    <router-view />\n",
+        $request['map']['scripts'] = $this->livewire($request, 'Scripts');
+        $request['map']['styles'] = $this->livewire($request, 'Styles');
+        $request['map']['content'] = $this->content($request);
+
+        return $request;
+    }
+
+    private function livewire($request, $suffix)
+    {
+        return Arr::get($request, 'attr.pipeline.options.livewire') ? "\n    @livewire{$suffix}" : '';
+    }
+
+    private function content($request)
+    {
+        return match ($request['attr']['app_type']) {
+            'vue' => '<div id="app">' . "\n    <router-view />\n" . '</div>',
+            'blade' => $request['attr']['class'] ? '{{ $slot }}' : '@yield("page-content")',
             default => ''
         };
-        
-        return $request;
     }
 }
