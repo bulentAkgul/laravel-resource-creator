@@ -20,6 +20,7 @@ class RootBladeRequestService extends ViewRequestService
         $request['map']['scripts'] = $this->livewire($request, 'Scripts');
         $request['map']['styles'] = $this->livewire($request, 'Styles');
         $request['map']['content'] = $this->content($request);
+        $request['map']['head'] = $this->head($request);
 
         return $request;
     }
@@ -36,5 +37,10 @@ class RootBladeRequestService extends ViewRequestService
             'blade' => $request['attr']['class'] ? '{{ $slot }}' : '@yield("page-content")',
             default => ''
         };
+    }
+
+    private function head($request)
+    {
+        return $request['attr']['class'] ? '{{ $head }}' : '@yield("head")';
     }
 }
