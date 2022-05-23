@@ -15,7 +15,12 @@ class Blade
 
     public function stub(array $request): string
     {
-        return "blade.{$request['attr']['variation']}.stub";
+        return implode('.', array_filter([
+            'blade',
+            $request['attr']['variation'],
+            $request['attr']['class'] ? 'class' : 'classless',
+            'stub'
+        ]));
     }
 
     public function package(string $package)
