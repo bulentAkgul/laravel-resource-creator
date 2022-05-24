@@ -51,7 +51,7 @@ class CombineImports
 
     private static function write(string $path)
     {
-        WriteToFile::handle(self::$content, $path);
+        WriteToFile::_(self::$content, $path);
     }
 
     private static function combine(): array
