@@ -11,8 +11,12 @@ use Illuminate\Support\Arr;
 
 class RootBladeRequestService extends ViewRequestService
 {
+    private $class;
+
     public function handle(array $request): array
     {
+        $this->class = $request['attr']['class'];
+
         return $this->index($request) ?? $this->layout($request);
     }
 
@@ -21,14 +25,9 @@ class RootBladeRequestService extends ViewRequestService
         if ($this->isNotIndex($request['attr'])) return null;
 
         $request['attr']['path'] = $this->setIndexPath();
-        $request['attr']['stub'] = 'blade.index.' . ($request['attr']['class'] ? 'class' : 'classless') . '.stub';
+        $request['attr']['stub'] = $this->setStub('index');
 
         return $request;
-    }
-
-    private function isNotIndex(array $attr): bool
-    {
-        return $attr['name'] != 'index' || $attr['job'] != 'packagify';
     }
 
     private function layout(array $request): array
@@ -36,7 +35,7 @@ class RootBladeRequestService extends ViewRequestService
         $app = $request['attr']['app_type'] == 'blade' ? 'mpa' : 'spa';
 
         $request['attr']['path'] = Text::dropTail($request['attr']['path']);
-        $request['attr']['stub'] = "blade.{$app}.stub";
+        $request['attr']['stub'] = $this->setStub($app);
 
         $request['map']['extend'] = $request['attr']['parent']['name'];
 
@@ -49,9 +48,21 @@ class RootBladeRequestService extends ViewRequestService
         return $request;
     }
 
+    private function isNotIndex(array $attr): bool
+    {
+        return $attr['name'] != 'index' || $attr['job'] != 'packagify';
+    }
+
     private function setIndexPath()
     {
         return Path::glue([base_path(), 'resources', 'app', Settings::folders('view')]);
+    }
+
+    private function setStub($name)
+    {
+        return implode('.', [
+            'blade', $name, $this->class ? 'class' : 'classless', 'stub'
+        ]);
     }
 
     private function livewire($request, $suffix)
@@ -70,13 +81,13 @@ class RootBladeRequestService extends ViewRequestService
     {
         return match ($request['attr']['app_type']) {
             'vue' => '<div id="app">' . "\n    <router-view />\n" . '</div>',
-            'blade' => $request['attr']['class'] ? '{{ $slot }}' : '@yield("page-content")',
+            'blade' => $this->class ? '{{ $slot }}' : '@yield("page-content")',
             default => ''
         };
     }
 
     private function head($request)
     {
-        return $request['attr']['class'] ? '{{ $head }}' : '@yield("head")';
+        return $this->class ? '{{ $head }}' : '@yield("head")';
     }
 }
