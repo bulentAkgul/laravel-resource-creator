@@ -87,11 +87,11 @@ class BladeViewTest extends TestCase
     {
         $this->testPackage = (new SetupTest)();
 
-        // Settings::set('repository.standalone_laravel', true);
         Settings::set('main.each_page_has_controller', true);
         Settings::set('main.tasks_as_sections', false);
+        Settings::set('files.view.pairs', ['js']);
 
-        $this->artisan("create:resource posts view:page {$this->testPackage['name']} web");
+        $this->artisan("create:resource posts:index view:page {$this->testPackage['name']} admin");
 
         $this->assertTrue(true);
     }

@@ -12,20 +12,30 @@ use Bakgul\ResourceCreator\Services\RegistrationServices\VueRegistrationServices
 use Bakgul\ResourceCreator\Services\RequestServices\JsRequestServices\VueJsRequestService;
 use Bakgul\ResourceCreator\Services\ResourceServices\JsResourceService;
 use Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices\JsResourceSubServices\RootVueJsResourceService;
+use Bakgul\ResourceCreator\Services\ResourceServices\JsResourceServices\JsResourceSubServices\ClientVueJsResourceService;
 
 class VueJsResourceService extends JsResourceService
 {
     public function create(array $request): void
     {
-        $request['attr']['variation'] == 'root'
-            ? $this->createRoot($request)
-            : $this->createFiles($request);
+        match ($request['attr']['variation']) {
+            'root' => $this->createRoot($request),
+            'client' => $this->createClient($request),
+            default => $this->createFiles($request)
+        };
     }
 
     private function createRoot($request)
     {
         (new RootVueJsResourceService)->create(
             (new VueJsRequestService('root'))->handle($request)
+        );
+    }
+
+    private static function createClient($request)
+    {
+        (new ClientVueJsResourceService)->create(
+            (new VueJsRequestService($request['attr']['role']))->handle($request)
         );
     }
 
