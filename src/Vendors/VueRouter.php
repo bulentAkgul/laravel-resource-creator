@@ -3,7 +3,6 @@
 namespace Bakgul\ResourceCreator\Vendors;
 
 use Bakgul\Kernel\Functions\UpdateSchema;
-use Bakgul\ResourceCreator\Tasks\SetRoute;
 
 class VueRouter
 {
@@ -20,11 +19,6 @@ class VueRouter
     public function file(array $request): string
     {
         return "{$request['map']['name']}.{$request['attr']['extension']}";
-    }
-
-    public function route(array $request): string
-    {
-        return SetRoute::_($request);
     }
 
     public function schema(array $attr): string
